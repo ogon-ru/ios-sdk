@@ -105,6 +105,22 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         }
     }
     
+    func didAuthorizePayment(payment: PKPayment) {
+        var data = Pb_ApplePayPaymentData()
+        data.token = Pb_ApplePayPaymentToken()
+        data.token.paymentMethod = Pb_ApplePaymentMethod()
+        data.token.paymentData = payment.token.paymentData.base64EncodedString()
+        data.token.transactionIdentifier = payment.token.transactionIdentifier
+        data.token.paymentMethod.displayName = payment.token.paymentMethod.displayName ?? ""
+        data.token.paymentMethod.network = payment.token.paymentMethod.network?.rawValue ?? ""
+        
+        var event = Pb_MobileEvent()
+        event.type = Pb_MobileEventType.mobileEventApplepayPaymentDataResponse
+        event.applepayPaymentData = data
+        
+        sendEvent(event: event)
+    }
+    
     private func sendEvent(event: Pb_MobileEvent) {
         var options = JSONEncodingOptions()
         options.preserveProtoFieldNames = true
@@ -132,6 +148,9 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         case Pb_MobileEventType.mobileEventApplepayPaymentDataRequest:
             paymentHandler.startPayment(request: event.applepayPaymentDataRequest)
             break
+        case Pb_MobileEventType.mobileEventOpenURLRequest:
+            openURL(url: event.openURLRequest)
+            break
             
         default: break
         }
@@ -154,19 +173,9 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         sendEvent(event: event)
     }
     
-    func didAuthorizePayment(payment: PKPayment) {
-        var data = Pb_ApplePayPaymentData()
-        data.token = Pb_ApplePayPaymentToken()
-        data.token.paymentMethod = Pb_ApplePaymentMethod()
-        data.token.paymentData = payment.token.paymentData.base64EncodedString()
-        data.token.transactionIdentifier = payment.token.transactionIdentifier
-        data.token.paymentMethod.displayName = payment.token.paymentMethod.displayName ?? ""
-        data.token.paymentMethod.network = payment.token.paymentMethod.network?.rawValue ?? ""
-        
-        var event = Pb_MobileEvent()
-        event.type = Pb_MobileEventType.mobileEventApplepayPaymentDataResponse
-        event.applepayPaymentData = data
-        
-        sendEvent(event: event)
+    private func openURL(url: String) {
+        if let link = URL(string: url) {
+            UIApplication.shared.open(link)
+        }
     }
 }

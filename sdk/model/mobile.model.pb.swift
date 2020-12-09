@@ -33,6 +33,7 @@ enum Pb_MobileEventType: SwiftProtobuf.Enum {
   case mobileEventApplepayPaymentDataRequest // = 8
   case mobileEventApplepayPaymentDataResponse // = 9
   case mobileEventApplepayPaymentDataError // = 10
+  case mobileEventOpenURLRequest // = 11
   case UNRECOGNIZED(Int)
 
   init() {
@@ -52,6 +53,7 @@ enum Pb_MobileEventType: SwiftProtobuf.Enum {
     case 8: self = .mobileEventApplepayPaymentDataRequest
     case 9: self = .mobileEventApplepayPaymentDataResponse
     case 10: self = .mobileEventApplepayPaymentDataError
+    case 11: self = .mobileEventOpenURLRequest
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -69,6 +71,7 @@ enum Pb_MobileEventType: SwiftProtobuf.Enum {
     case .mobileEventApplepayPaymentDataRequest: return 8
     case .mobileEventApplepayPaymentDataResponse: return 9
     case .mobileEventApplepayPaymentDataError: return 10
+    case .mobileEventOpenURLRequest: return 11
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -91,6 +94,7 @@ extension Pb_MobileEventType: CaseIterable {
     .mobileEventApplepayPaymentDataRequest,
     .mobileEventApplepayPaymentDataResponse,
     .mobileEventApplepayPaymentDataError,
+    .mobileEventOpenURLRequest,
   ]
 }
 
@@ -161,6 +165,14 @@ struct Pb_MobileEvent {
     set {payload = .applepayPaymentData(newValue)}
   }
 
+  var openURLRequest: String {
+    get {
+      if case .openURLRequest(let v)? = payload {return v}
+      return String()
+    }
+    set {payload = .openURLRequest(newValue)}
+  }
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   enum OneOf_Payload: Equatable {
@@ -171,6 +183,7 @@ struct Pb_MobileEvent {
     case paymentData(Pb_PaymentData)
     case applepayPaymentDataRequest(Pb_ApplePayPaymentDataRequest)
     case applepayPaymentData(Pb_ApplePayPaymentData)
+    case openURLRequest(String)
 
   #if !swift(>=4.1)
     static func ==(lhs: Pb_MobileEvent.OneOf_Payload, rhs: Pb_MobileEvent.OneOf_Payload) -> Bool {
@@ -204,6 +217,10 @@ struct Pb_MobileEvent {
       }()
       case (.applepayPaymentData, .applepayPaymentData): return {
         guard case .applepayPaymentData(let l) = lhs, case .applepayPaymentData(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.openURLRequest, .openURLRequest): return {
+        guard case .openURLRequest(let l) = lhs, case .openURLRequest(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
       default: return false
@@ -835,6 +852,7 @@ extension Pb_MobileEventType: SwiftProtobuf._ProtoNameProviding {
     8: .same(proto: "MOBILE_EVENT_APPLEPAY_PAYMENT_DATA_REQUEST"),
     9: .same(proto: "MOBILE_EVENT_APPLEPAY_PAYMENT_DATA_RESPONSE"),
     10: .same(proto: "MOBILE_EVENT_APPLEPAY_PAYMENT_DATA_ERROR"),
+    11: .same(proto: "MOBILE_EVENT_OPEN_URL_REQUEST"),
   ]
 }
 
@@ -849,6 +867,7 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     6: .standard(proto: "payment_data"),
     7: .standard(proto: "applepay_payment_data_request"),
     8: .standard(proto: "applepay_payment_data"),
+    9: .standard(proto: "open_url_request"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -918,6 +937,12 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.payload = .applepayPaymentData(v)}
       }()
+      case 9: try {
+        if self.payload != nil {try decoder.handleConflictingOneOf()}
+        var v: String?
+        try decoder.decodeSingularStringField(value: &v)
+        if let v = v {self.payload = .openURLRequest(v)}
+      }()
       default: break
       }
     }
@@ -958,6 +983,10 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     case .applepayPaymentData?: try {
       guard case .applepayPaymentData(let v)? = self.payload else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+    }()
+    case .openURLRequest?: try {
+      guard case .openURLRequest(let v)? = self.payload else { preconditionFailure() }
+      try visitor.visitSingularStringField(value: v, fieldNumber: 9)
     }()
     case nil: break
     }
@@ -2079,8 +2108,8 @@ extension Pb_MobileError: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 extension Pb_ApplePayPaymentDataRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".ApplePayPaymentDataRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "country_code"),
-    2: .same(proto: "currency_code"),
+    1: .standard(proto: "country_code"),
+    2: .standard(proto: "currency_code"),
     3: .same(proto: "total"),
   ]
 
