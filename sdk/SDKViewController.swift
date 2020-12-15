@@ -26,6 +26,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         
         let preferences = WKPreferences()
         preferences.javaScriptEnabled = true
+        preferences.javaScriptCanOpenWindowsAutomatically = true
         
         let userScript = WKUserScript(
             source: """
@@ -69,8 +70,10 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         webConfiguration.userContentController.add(self, name: "PNWidget")
         webConfiguration.userContentController.add(self, name: "navigationStateChange")
         webConfiguration.userContentController.addUserScript(userScript)
+        webConfiguration.websiteDataStore =  WKWebsiteDataStore.default()
         
         webView = WKWebView(frame: view.bounds, configuration: webConfiguration)
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         view.addSubview(webView)
     }
