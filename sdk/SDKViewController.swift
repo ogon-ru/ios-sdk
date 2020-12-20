@@ -74,6 +74,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         
         webView = WKWebView(frame: view.bounds, configuration: webConfiguration)
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        webView.allowsBackForwardNavigationGestures = true
         
         view.addSubview(webView)
     }
@@ -89,6 +90,16 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
     
     override public func viewSafeAreaInsetsDidChange() {
         webView.frame = view.safeAreaLayoutGuide.layoutFrame
+    }
+    
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
+
+    override public func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
