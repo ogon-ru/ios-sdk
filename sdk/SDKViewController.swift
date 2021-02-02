@@ -165,6 +165,9 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         case Pb_MobileEventType.mobileEventOpenURLRequest:
             openURL(url: event.openURLRequest)
             break
+        case Pb_MobileEventType.mobileEventShareURLRequest:
+            shareURL(url: event.shareURLRequest)
+            break
             
         default: break
         }
@@ -190,6 +193,15 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
     private func openURL(url: String) {
         if let link = URL(string: url) {
             UIApplication.shared.open(link)
+        }
+    }
+    
+    private func shareURL(url: String) {
+        if let link = URL(string: url) {
+            let activityViewController = UIActivityViewController(activityItems: [link], applicationActivities: nil)
+            activityViewController.excludedActivityTypes = [.airDrop, .mail]
+            
+            present(activityViewController, animated: true)
         }
     }
 }

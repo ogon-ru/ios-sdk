@@ -34,6 +34,8 @@ enum Pb_MobileEventType: SwiftProtobuf.Enum {
   case mobileEventApplepayPaymentDataResponse // = 9
   case mobileEventApplepayPaymentDataError // = 10
   case mobileEventOpenURLRequest // = 11
+  case mobileEventBack // = 12
+  case mobileEventShareURLRequest // = 13
   case UNRECOGNIZED(Int)
 
   init() {
@@ -54,6 +56,8 @@ enum Pb_MobileEventType: SwiftProtobuf.Enum {
     case 9: self = .mobileEventApplepayPaymentDataResponse
     case 10: self = .mobileEventApplepayPaymentDataError
     case 11: self = .mobileEventOpenURLRequest
+    case 12: self = .mobileEventBack
+    case 13: self = .mobileEventShareURLRequest
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -72,6 +76,8 @@ enum Pb_MobileEventType: SwiftProtobuf.Enum {
     case .mobileEventApplepayPaymentDataResponse: return 9
     case .mobileEventApplepayPaymentDataError: return 10
     case .mobileEventOpenURLRequest: return 11
+    case .mobileEventBack: return 12
+    case .mobileEventShareURLRequest: return 13
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -95,6 +101,8 @@ extension Pb_MobileEventType: CaseIterable {
     .mobileEventApplepayPaymentDataResponse,
     .mobileEventApplepayPaymentDataError,
     .mobileEventOpenURLRequest,
+    .mobileEventBack,
+    .mobileEventShareURLRequest,
   ]
 }
 
@@ -173,6 +181,14 @@ struct Pb_MobileEvent {
     set {payload = .openURLRequest(newValue)}
   }
 
+  var shareURLRequest: String {
+    get {
+      if case .shareURLRequest(let v)? = payload {return v}
+      return String()
+    }
+    set {payload = .shareURLRequest(newValue)}
+  }
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   enum OneOf_Payload: Equatable {
@@ -184,6 +200,7 @@ struct Pb_MobileEvent {
     case applepayPaymentDataRequest(Pb_ApplePayPaymentDataRequest)
     case applepayPaymentData(Pb_ApplePayPaymentData)
     case openURLRequest(String)
+    case shareURLRequest(String)
 
   #if !swift(>=4.1)
     static func ==(lhs: Pb_MobileEvent.OneOf_Payload, rhs: Pb_MobileEvent.OneOf_Payload) -> Bool {
@@ -221,6 +238,10 @@ struct Pb_MobileEvent {
       }()
       case (.openURLRequest, .openURLRequest): return {
         guard case .openURLRequest(let l) = lhs, case .openURLRequest(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.shareURLRequest, .shareURLRequest): return {
+        guard case .shareURLRequest(let l) = lhs, case .shareURLRequest(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
       default: return false
@@ -853,6 +874,8 @@ extension Pb_MobileEventType: SwiftProtobuf._ProtoNameProviding {
     9: .same(proto: "MOBILE_EVENT_APPLEPAY_PAYMENT_DATA_RESPONSE"),
     10: .same(proto: "MOBILE_EVENT_APPLEPAY_PAYMENT_DATA_ERROR"),
     11: .same(proto: "MOBILE_EVENT_OPEN_URL_REQUEST"),
+    12: .same(proto: "MOBILE_EVENT_BACK"),
+    13: .same(proto: "MOBILE_EVENT_SHARE_URL_REQUEST"),
   ]
 }
 
@@ -868,6 +891,7 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     7: .standard(proto: "applepay_payment_data_request"),
     8: .standard(proto: "applepay_payment_data"),
     9: .standard(proto: "open_url_request"),
+    10: .standard(proto: "share_url_request"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -943,6 +967,12 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         try decoder.decodeSingularStringField(value: &v)
         if let v = v {self.payload = .openURLRequest(v)}
       }()
+      case 10: try {
+        if self.payload != nil {try decoder.handleConflictingOneOf()}
+        var v: String?
+        try decoder.decodeSingularStringField(value: &v)
+        if let v = v {self.payload = .shareURLRequest(v)}
+      }()
       default: break
       }
     }
@@ -987,6 +1017,10 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     case .openURLRequest?: try {
       guard case .openURLRequest(let v)? = self.payload else { preconditionFailure() }
       try visitor.visitSingularStringField(value: v, fieldNumber: 9)
+    }()
+    case .shareURLRequest?: try {
+      guard case .shareURLRequest(let v)? = self.payload else { preconditionFailure() }
+      try visitor.visitSingularStringField(value: v, fieldNumber: 10)
     }()
     case nil: break
     }
