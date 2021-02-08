@@ -9,7 +9,7 @@ public protocol SDKViewDismissDelegate : NSObjectProtocol {
 }
 
 @objcMembers
-public class SDKViewController: UIViewController, WKScriptMessageHandler, PaymentHandlerDelegate {
+public class SDKViewController: UIViewController, WKScriptMessageHandler, PaymentHandlerDelegate, WKNavigationDelegate {
     
     public var token: String = ""
     public var baseUrl = "https://widget.setpartnerstv.com"
@@ -75,6 +75,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         webView = WKWebView(frame: view.bounds, configuration: webConfiguration)
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.allowsBackForwardNavigationGestures = true
+        webView.navigationDelegate = self
         
         view.addSubview(webView)
     }
@@ -100,6 +101,18 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
     override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse,
+                 decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+
+        if let response = navigationResponse.response as? HTTPURLResponse {
+            if response.statusCode >= 400 {
+                webView.allowsBackForwardNavigationGestures = false
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+            }
+        }
+        decisionHandler(.allow)
     }
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
