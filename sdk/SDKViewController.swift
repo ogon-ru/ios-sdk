@@ -145,12 +145,12 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         event.type = Pb_MobileEventType.mobileEventApplepayPaymentDataResponse
         event.applepayPaymentData = data
         
-        sendEvent(event: event)
+        sendEvent(event: event, preserveProtoFieldNames: false)
     }
     
-    private func sendEvent(event: Pb_MobileEvent) {
+    private func sendEvent(event: Pb_MobileEvent, preserveProtoFieldNames: Bool = true) {
         var options = JSONEncodingOptions()
-        options.preserveProtoFieldNames = true
+        options.preserveProtoFieldNames = preserveProtoFieldNames
         
         if let json = try? event.jsonString(options: options) {
             let js = """
