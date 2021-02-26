@@ -12,7 +12,9 @@ public protocol SDKViewDismissDelegate : NSObjectProtocol {
 public class SDKViewController: UIViewController, WKScriptMessageHandler, PaymentHandlerDelegate, WKNavigationDelegate {
     
     public var token: String = ""
-    public var baseUrl = "https://widget.setpartnerstv.com"
+    public var baseUrl = "https://widget.ogon.ru"
+    public var httpUsername = ""
+    public var httpPassword = ""
     public weak var dismissDelegate: SDKViewDismissDelegate?
     
     private var webView: WKWebView!
@@ -113,6 +115,16 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
             }
         }
         decisionHandler(.allow)
+    }
+    
+    public func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        guard !httpUsername.isEmpty && !httpPassword.isEmpty else {
+            completionHandler(.performDefaultHandling, nil)
+            return
+        }
+        
+        let credential = URLCredential(user: httpUsername, password: httpPassword, persistence: .none)
+        completionHandler(.useCredential, credential)
     }
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
