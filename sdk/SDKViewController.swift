@@ -5,7 +5,7 @@ import SwiftProtobuf
 
 @objc
 public protocol SDKViewDismissDelegate : NSObjectProtocol {
-    func sdkViewDismiss()
+    func sdkViewDismiss(error: Error?)
 }
 
 @objcMembers
@@ -109,16 +109,30 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
                  decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
 
         if let response = navigationResponse.response as? HTTPURLResponse {
-            if response.statusCode >= 400 {
+            if response.statusCode >= 400 && navigationResponse.isForMainFrame {
                 webView.allowsBackForwardNavigationGestures = false
                 self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+                handleNavigationError(error: NSError(domain: "sdk:webview", code: 1, userInfo: nil))
             }
         }
+        
         decisionHandler(.allow)
+    }
+    
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        handleNavigationError(error: error)
+    }
+    
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        handleNavigationError(error: error)
     }
     
     public func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         guard !httpUsername.isEmpty && !httpPassword.isEmpty else {
+            completionHandler(.performDefaultHandling, nil)
+            return
+        }
+        guard challenge.proposedCredential?.user != httpUsername || challenge.proposedCredential?.password != httpPassword else {
             completionHandler(.performDefaultHandling, nil)
             return
         }
@@ -202,7 +216,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         if (webView.url!.relativeString.hasSuffix("/escape")) {
 //            dismiss(animated: true) {}
             if let delegate = self.dismissDelegate {
-                delegate.sdkViewDismiss()
+                delegate.sdkViewDismiss(error: nil)
             }
         }
     }
@@ -227,6 +241,14 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
             activityViewController.excludedActivityTypes = [.airDrop, .mail]
             
             present(activityViewController, animated: true)
+        }
+    }
+    
+    private func handleNavigationError(error: Error) {
+        if !webView.canGoBack {
+            if let delegate = self.dismissDelegate {
+                delegate.sdkViewDismiss(error: error)
+            }
         }
     }
 }
