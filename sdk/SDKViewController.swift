@@ -9,7 +9,7 @@ public protocol SDKViewDismissDelegate : NSObjectProtocol {
 }
 
 @objcMembers
-public class SDKViewController: UIViewController, WKScriptMessageHandler, PaymentHandlerDelegate, WKNavigationDelegate {
+public class SDKViewController: UIViewController, WKScriptMessageHandler, PaymentHandlerDelegate, WKNavigationDelegate, WKUIDelegate {
     
     public var token: String = ""
     public var baseUrl = "https://widget.ogon.ru"
@@ -78,6 +78,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.allowsBackForwardNavigationGestures = true
         webView.navigationDelegate = self
+        webView.uiDelegate = self
         
         view.addSubview(webView)
     }
@@ -103,6 +104,29 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
     override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
+    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if (navigationAction.targetFrame == nil || !navigationAction.targetFrame!.isMainFrame) {
+            webView.load(navigationAction.request)
+        }
+
+        return nil
+    }
+
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        decisionHandler(.allow)
+    }
+
+    @available(iOS 13.0, *)
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
+        let pref = WKWebpagePreferences()
+        if #available(iOS 14.0, *) {
+            pref.allowsContentJavaScript = true
+        }
+        pref.preferredContentMode = .recommended
+
+        decisionHandler(.allow, pref)
     }
     
     public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse,
