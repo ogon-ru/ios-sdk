@@ -33,7 +33,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         let userScript = WKUserScript(
             source: """
                 (function(){
-                    window.PNWidget = {};
+                    window.PNWidget = window.PNWidget || {};
                     window.PNWidget._listeners = new Set();
                         
                     window.PNWidget.sendMobileEvent = function sendMobileEvent(event) {
@@ -61,6 +61,10 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
                     window.addEventListener('popstate', function() {
                         window.webkit.messageHandlers.navigationStateChange.postMessage(null);
                     });
+
+                    if (window.PNWidget.onready) {
+                        window.PNWidget.onready();
+                    }
                 })()
             """,
             injectionTime: WKUserScriptInjectionTime.atDocumentStart,
