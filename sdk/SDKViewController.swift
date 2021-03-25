@@ -194,6 +194,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         data.token.transactionIdentifier = payment.token.transactionIdentifier
         data.token.paymentMethod.displayName = payment.token.paymentMethod.displayName ?? ""
         data.token.paymentMethod.network = payment.token.paymentMethod.network?.rawValue ?? ""
+        data.token.paymentMethod.type = getPaymentMethodTypeName(type: payment.token.paymentMethod.type)
         
         var event = Pb_MobileEvent()
         event.type = Pb_MobileEventType.mobileEventApplepayPaymentDataResponse
@@ -277,6 +278,23 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
             if let delegate = self.dismissDelegate {
                 delegate.sdkViewDismiss(error: error)
             }
+        }
+    }
+    
+    private func getPaymentMethodTypeName(type: PKPaymentMethodType) -> String {
+        switch type {
+        case .unknown:
+            return "unknown"
+        case .debit:
+            return "debit"
+        case .credit:
+            return "credit"
+        case .prepaid:
+            return "prepaid"
+        case .store:
+            return "store"
+        default:
+            return "unknown"
         }
     }
 }

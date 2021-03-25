@@ -851,6 +851,8 @@ struct Pb_ApplePaymentMethod {
 
   var network: String = String()
 
+  var type: String = String()
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -2302,6 +2304,7 @@ extension Pb_ApplePaymentMethod: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "display_name"),
     2: .same(proto: "network"),
+    3: .same(proto: "type"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -2312,6 +2315,7 @@ extension Pb_ApplePaymentMethod: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.displayName) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.network) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.type) }()
       default: break
       }
     }
@@ -2324,12 +2328,16 @@ extension Pb_ApplePaymentMethod: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     if !self.network.isEmpty {
       try visitor.visitSingularStringField(value: self.network, fieldNumber: 2)
     }
+    if !self.type.isEmpty {
+      try visitor.visitSingularStringField(value: self.type, fieldNumber: 3)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Pb_ApplePaymentMethod, rhs: Pb_ApplePaymentMethod) -> Bool {
     if lhs.displayName != rhs.displayName {return false}
     if lhs.network != rhs.network {return false}
+    if lhs.type != rhs.type {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
