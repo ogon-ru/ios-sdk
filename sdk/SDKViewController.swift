@@ -96,10 +96,6 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         webView.load(request)
     }
     
-    override public func viewSafeAreaInsetsDidChange() {
-        webView.frame = view.safeAreaLayoutGuide.layoutFrame
-    }
-    
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
