@@ -80,7 +80,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         
         webView = WKWebView(frame: view.bounds, configuration: webConfiguration)
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        webView.allowsBackForwardNavigationGestures = true
+        webView.allowsBackForwardNavigationGestures = false
         webView.navigationDelegate = self
         webView.uiDelegate = self
         
@@ -134,7 +134,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
 
         if let response = navigationResponse.response as? HTTPURLResponse {
             if response.statusCode >= 400 && navigationResponse.isForMainFrame {
-                webView.allowsBackForwardNavigationGestures = false
+                //webView.allowsBackForwardNavigationGestures = false
                 self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
                 handleNavigationError(error: NSError(domain: "sdk:webview", code: 1, userInfo: nil))
             }
