@@ -13,8 +13,10 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
     
     public var token: String = ""
     public var baseUrl = "https://widget.ogon.ru"
+    public var queryItems: [URLQueryItem] = []
     public var httpUsername = ""
     public var httpPassword = ""
+    public var applePayEnabled = false
     public weak var dismissDelegate: SDKViewDismissDelegate?
     
     private var webView: WKWebView!
@@ -80,7 +82,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         
         webView = WKWebView(frame: view.bounds, configuration: webConfiguration)
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        webView.allowsBackForwardNavigationGestures = true
+        webView.allowsBackForwardNavigationGestures = false
         webView.navigationDelegate = self
         webView.uiDelegate = self
         
@@ -90,8 +92,14 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        let url = URL(string: "\(baseUrl)/?token=\(token)")
-        let request = URLRequest(url: url!)
+        var urlComponents = URLComponents(string: baseUrl)!
+        urlComponents.queryItems = queryItems
+        
+        if !token.isEmpty {
+            urlComponents.queryItems?.append(URLQueryItem(name: "token", value: token))
+        }
+        
+        let request = URLRequest(url: urlComponents.url!)
         
         webView.load(request)
     }
@@ -134,7 +142,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
 
         if let response = navigationResponse.response as? HTTPURLResponse {
             if response.statusCode >= 400 && navigationResponse.isForMainFrame {
-                webView.allowsBackForwardNavigationGestures = false
+                //webView.allowsBackForwardNavigationGestures = false
                 self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
                 handleNavigationError(error: NSError(domain: "sdk:webview", code: 1, userInfo: nil))
             }
@@ -249,7 +257,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
     private func isReadyToPayRequest() {
         var event = Pb_MobileEvent()
         event.type = Pb_MobileEventType.mobileEventApplepayIsReadyToPayResponse
-        event.isReadyToPay = paymentHandler.canMakePayments()
+        event.isReadyToPay = applePayEnabled && paymentHandler.canMakePayments()
         
         sendEvent(event: event)
     }
