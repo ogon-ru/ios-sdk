@@ -15,7 +15,7 @@ class PaymentHandler : NSObject, PKPaymentAuthorizationControllerDelegate {
         let total = PKPaymentSummaryItem(label: request.total.label, amount: NSDecimalNumber(string: request.total.amount), type: .final)
         let paymentRequest = PKPaymentRequest()
         paymentRequest.paymentSummaryItems = [total]
-        paymentRequest.merchantIdentifier = "merchant.ru.pnhub.sdk"
+        paymentRequest.merchantIdentifier = "merchant.ru.ogon"
         paymentRequest.merchantCapabilities = .capability3DS
         paymentRequest.countryCode = request.countryCode
         paymentRequest.currencyCode = request.currencyCode

@@ -32,11 +32,16 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         preferences.javaScriptEnabled = true
         preferences.javaScriptCanOpenWindowsAutomatically = true
         
+        let bundle = Bundle(for: SDKViewController.self)
+        let version = bundle.infoDictionary!["CFBundleShortVersionString"] as! String
+        let build = bundle.infoDictionary!["CFBundleVersion"] as! String
+        
         let userScript = WKUserScript(
             source: """
                 (function(){
                     window.PNWidget = window.PNWidget || {};
                     window.PNWidget._listeners = new Set();
+                    window.PNWidget.version = "\(version) (\(build))";
                         
                     window.PNWidget.sendMobileEvent = function sendMobileEvent(event) {
                         window.webkit.messageHandlers.PNWidget.postMessage(JSON.stringify(event));
