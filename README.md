@@ -5,17 +5,10 @@
 
 ## Установка зависимостей
 
-Для установки зависимостей необходимо поставить CocoaPods:
+* поставить [XCode](https://developer.apple.com/xcode/) последней версии
+* поставить CocoaPods: `brew install cocoapods`
+* установить зависимости из CocoaPods: `pod install`
 
-```sh
-brew install cocoapods
-```
-
-Установка зависимостей из CocoaPods:
-
-```sh
-pod install
-```
 
 ## Сборка
 
