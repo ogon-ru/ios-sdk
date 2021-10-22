@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
-  spec.name         = "OgonWidgetSDK"
-  spec.version      = "1.0.0"
+  spec.name         = "OgonRuSDK"
+  spec.version      = "1.0.1"
   spec.summary      = "Ogon widget integration lib"
-  spec.homepage     = "https://ogon.ru"
+  spec.homepage     = "https://github.com/ogon-ru/ios-sdk"
   spec.license      = { :type => "MIT", :file => "LICENSE" }
-  spec.author       = "Set Partnerstv"
+  spec.author       = "Egor Komarov"
   spec.platform     = :ios, "11.0"
   spec.source       = { :git => "https://github.com/ogon-ru/ios-sdk.git", :tag => "#{spec.version}" }
   spec.source_files = "sdk/**/*.{swift,h,m}"
