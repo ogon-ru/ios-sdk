@@ -1,5 +1,6 @@
 build
 derived_data
+.idea
 
 # CocoaPods
 Pods
