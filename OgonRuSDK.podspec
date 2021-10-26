@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "OgonRuSDK"
-  spec.version      = "1.0.1"
+  spec.version      = ENV['LIB_VERSION'] || "1.0.1"
   spec.summary      = "Ogon widget integration lib"
   spec.homepage     = "https://github.com/ogon-ru/ios-sdk"
   spec.license      = { :type => "MIT", :file => "LICENSE" }
