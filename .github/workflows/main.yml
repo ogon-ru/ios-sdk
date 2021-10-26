@@ -2,18 +2,21 @@ name: deploy
 
 on:
   push:
-    branches:
-      - master
     tags:
       - '*'
 
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: macOS-11
     steps:
       - uses: actions/checkout@v1
       - name: Install Cocoapods
         run: gem install cocoapods
-      - uses: michaelhenry/deploy-to-cocoapods-github-action@1.0.9
+      - name: Deploy to Cocoapods
+        run: |
+          export LIB_VERSION=$(git describe --tags `git rev-list --tags --max-count=1`)
+          set -eo pipefail
+          pod lib lint --allow-warnings
+          pod trunk push OgonRuSDK.podspec --allow-warnings
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
