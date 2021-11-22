@@ -17,6 +17,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
     public var httpUsername = ""
     public var httpPassword = ""
     public var applePayEnabled = false
+    public var isOgonApp = false
     public weak var dismissDelegate: SDKViewDismissDelegate?
     
     private var webView: WKWebView!
@@ -42,6 +43,8 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
                     window.PNWidget = window.PNWidget || {};
                     window.PNWidget._listeners = new Set();
                     window.PNWidget.version = "\(version) (\(build))";
+                    window.PNWidget.platform = "iOS";
+                    window.PNWidget.features = { auth: false };
                         
                     window.PNWidget.sendMobileEvent = function sendMobileEvent(event) {
                         window.webkit.messageHandlers.PNWidget.postMessage(JSON.stringify(event));
@@ -84,6 +87,10 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         webConfiguration.userContentController.add(self, name: "navigationStateChange")
         webConfiguration.userContentController.addUserScript(userScript)
         webConfiguration.websiteDataStore =  WKWebsiteDataStore.default()
+        
+        if isOgonApp {
+            webConfiguration.userContentController.add(NoopWKScriptMessageHandler(), name: "OgonApp")
+        }
         
         webView = WKWebView(frame: view.bounds, configuration: webConfiguration)
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -305,5 +312,11 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         default:
             return "unknown"
         }
+    }
+}
+
+private class NoopWKScriptMessageHandler : NSObject, WKScriptMessageHandler {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        
     }
 }
