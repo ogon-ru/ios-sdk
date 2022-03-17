@@ -36,6 +36,15 @@ enum Pb_MobileEventType: SwiftProtobuf.Enum {
   case mobileEventOpenURLRequest // = 11
   case mobileEventBack // = 12
   case mobileEventShareURLRequest // = 13
+  case mobileEventGetParamsRequest // = 14
+  case mobileEventGetParamsResponse // = 15
+  case mobileEventSetParamsRequest // = 16
+  case mobileEventCreateKeysRequest // = 17
+  case mobileEventCreateKeysResponse // = 18
+  case mobileEventParamsUpdated // = 19
+  case mobileEventAnalyticsEvent // = 20
+  case mobileEventClipboardWrite // = 21
+  case mobileEventReview // = 22
   case UNRECOGNIZED(Int)
 
   init() {
@@ -58,6 +67,15 @@ enum Pb_MobileEventType: SwiftProtobuf.Enum {
     case 11: self = .mobileEventOpenURLRequest
     case 12: self = .mobileEventBack
     case 13: self = .mobileEventShareURLRequest
+    case 14: self = .mobileEventGetParamsRequest
+    case 15: self = .mobileEventGetParamsResponse
+    case 16: self = .mobileEventSetParamsRequest
+    case 17: self = .mobileEventCreateKeysRequest
+    case 18: self = .mobileEventCreateKeysResponse
+    case 19: self = .mobileEventParamsUpdated
+    case 20: self = .mobileEventAnalyticsEvent
+    case 21: self = .mobileEventClipboardWrite
+    case 22: self = .mobileEventReview
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -78,6 +96,15 @@ enum Pb_MobileEventType: SwiftProtobuf.Enum {
     case .mobileEventOpenURLRequest: return 11
     case .mobileEventBack: return 12
     case .mobileEventShareURLRequest: return 13
+    case .mobileEventGetParamsRequest: return 14
+    case .mobileEventGetParamsResponse: return 15
+    case .mobileEventSetParamsRequest: return 16
+    case .mobileEventCreateKeysRequest: return 17
+    case .mobileEventCreateKeysResponse: return 18
+    case .mobileEventParamsUpdated: return 19
+    case .mobileEventAnalyticsEvent: return 20
+    case .mobileEventClipboardWrite: return 21
+    case .mobileEventReview: return 22
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -103,6 +130,63 @@ extension Pb_MobileEventType: CaseIterable {
     .mobileEventOpenURLRequest,
     .mobileEventBack,
     .mobileEventShareURLRequest,
+    .mobileEventGetParamsRequest,
+    .mobileEventGetParamsResponse,
+    .mobileEventSetParamsRequest,
+    .mobileEventCreateKeysRequest,
+    .mobileEventCreateKeysResponse,
+    .mobileEventParamsUpdated,
+    .mobileEventAnalyticsEvent,
+    .mobileEventClipboardWrite,
+    .mobileEventReview,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
+enum Pb_MobileAnalyticsEventType: SwiftProtobuf.Enum {
+  typealias RawValue = Int
+  case unspecified // = 0
+  case androidAppInstallReferrer // = 1
+  case androidIauInstall // = 2
+  case androidIauCancel // = 3
+  case UNRECOGNIZED(Int)
+
+  init() {
+    self = .unspecified
+  }
+
+  init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unspecified
+    case 1: self = .androidAppInstallReferrer
+    case 2: self = .androidIauInstall
+    case 3: self = .androidIauCancel
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  var rawValue: Int {
+    switch self {
+    case .unspecified: return 0
+    case .androidAppInstallReferrer: return 1
+    case .androidIauInstall: return 2
+    case .androidIauCancel: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+}
+
+#if swift(>=4.2)
+
+extension Pb_MobileAnalyticsEventType: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  static var allCases: [Pb_MobileAnalyticsEventType] = [
+    .unspecified,
+    .androidAppInstallReferrer,
+    .androidIauInstall,
+    .androidIauCancel,
   ]
 }
 
@@ -189,6 +273,54 @@ struct Pb_MobileEvent {
     set {payload = .shareURLRequest(newValue)}
   }
 
+  var applicationParams: Pb_MobileApplicationParams {
+    get {
+      if case .applicationParams(let v)? = payload {return v}
+      return Pb_MobileApplicationParams()
+    }
+    set {payload = .applicationParams(newValue)}
+  }
+
+  var createKeysRequest: Pb_CreateKeysRequest {
+    get {
+      if case .createKeysRequest(let v)? = payload {return v}
+      return Pb_CreateKeysRequest()
+    }
+    set {payload = .createKeysRequest(newValue)}
+  }
+
+  var createKeysResponse: Pb_CreateKeysResponse {
+    get {
+      if case .createKeysResponse(let v)? = payload {return v}
+      return Pb_CreateKeysResponse()
+    }
+    set {payload = .createKeysResponse(newValue)}
+  }
+
+  var applicationParamsUpdate: Pb_MobileApplicationParamsUpdate {
+    get {
+      if case .applicationParamsUpdate(let v)? = payload {return v}
+      return Pb_MobileApplicationParamsUpdate()
+    }
+    set {payload = .applicationParamsUpdate(newValue)}
+  }
+
+  var analyticsEvent: Pb_MobileAnalyticsEvent {
+    get {
+      if case .analyticsEvent(let v)? = payload {return v}
+      return Pb_MobileAnalyticsEvent()
+    }
+    set {payload = .analyticsEvent(newValue)}
+  }
+
+  var clipboardWrite: String {
+    get {
+      if case .clipboardWrite(let v)? = payload {return v}
+      return String()
+    }
+    set {payload = .clipboardWrite(newValue)}
+  }
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   enum OneOf_Payload: Equatable {
@@ -201,6 +333,12 @@ struct Pb_MobileEvent {
     case applepayPaymentData(Pb_ApplePayPaymentData)
     case openURLRequest(String)
     case shareURLRequest(String)
+    case applicationParams(Pb_MobileApplicationParams)
+    case createKeysRequest(Pb_CreateKeysRequest)
+    case createKeysResponse(Pb_CreateKeysResponse)
+    case applicationParamsUpdate(Pb_MobileApplicationParamsUpdate)
+    case analyticsEvent(Pb_MobileAnalyticsEvent)
+    case clipboardWrite(String)
 
   #if !swift(>=4.1)
     static func ==(lhs: Pb_MobileEvent.OneOf_Payload, rhs: Pb_MobileEvent.OneOf_Payload) -> Bool {
@@ -242,6 +380,30 @@ struct Pb_MobileEvent {
       }()
       case (.shareURLRequest, .shareURLRequest): return {
         guard case .shareURLRequest(let l) = lhs, case .shareURLRequest(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.applicationParams, .applicationParams): return {
+        guard case .applicationParams(let l) = lhs, case .applicationParams(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.createKeysRequest, .createKeysRequest): return {
+        guard case .createKeysRequest(let l) = lhs, case .createKeysRequest(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.createKeysResponse, .createKeysResponse): return {
+        guard case .createKeysResponse(let l) = lhs, case .createKeysResponse(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.applicationParamsUpdate, .applicationParamsUpdate): return {
+        guard case .applicationParamsUpdate(let l) = lhs, case .applicationParamsUpdate(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.analyticsEvent, .analyticsEvent): return {
+        guard case .analyticsEvent(let l) = lhs, case .analyticsEvent(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.clipboardWrite, .clipboardWrite): return {
+        guard case .clipboardWrite(let l) = lhs, case .clipboardWrite(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
       default: return false
@@ -858,6 +1020,133 @@ struct Pb_ApplePaymentMethod {
   init() {}
 }
 
+struct Pb_MobileApplicationParams {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var userID: String = String()
+
+  var deviceID: String = String()
+
+  var confirmationID: String = String()
+
+  var passwordEnabled: Bool = false
+
+  var biometryEnabled: Bool = false
+
+  var biometryAvailable: Bool = false
+
+  var fcmToken: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Pb_MobileApplicationParamsUpdate {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var userID: String = String()
+
+  var confirmationID: String = String()
+
+  var passwordEnabled: Bool = false
+
+  var biometryEnabled: Bool = false
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Pb_CreateKeysRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var password: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Pb_CreateKeysResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var publicKey: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Pb_MobileAnalyticsEvent {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var eventType: Pb_MobileAnalyticsEventType = .unspecified
+
+  var value: String = String()
+
+  var utmMedium: String = String()
+
+  var utmSource: String = String()
+
+  var utmCampaign: String = String()
+
+  var utmTerm: String = String()
+
+  var utmContent: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+#if swift(>=5.5) && canImport(_Concurrency)
+extension Pb_MobileEventType: @unchecked Sendable {}
+extension Pb_MobileAnalyticsEventType: @unchecked Sendable {}
+extension Pb_MobileEvent: @unchecked Sendable {}
+extension Pb_MobileEvent.OneOf_Payload: @unchecked Sendable {}
+extension Pb_IsReadyToPayRequest: @unchecked Sendable {}
+extension Pb_PaymentDataRequest: @unchecked Sendable {}
+extension Pb_MerchantInfo: @unchecked Sendable {}
+extension Pb_ShippingAddressParameters: @unchecked Sendable {}
+extension Pb_TransactionInfo: @unchecked Sendable {}
+extension Pb_DisplayItem: @unchecked Sendable {}
+extension Pb_ShippingOptionParameters: @unchecked Sendable {}
+extension Pb_ShippingOption: @unchecked Sendable {}
+extension Pb_PaymentData: @unchecked Sendable {}
+extension Pb_SelectionOptionData: @unchecked Sendable {}
+extension Pb_PaymentMethodData: @unchecked Sendable {}
+extension Pb_CardInfo: @unchecked Sendable {}
+extension Pb_Address: @unchecked Sendable {}
+extension Pb_PaymentMethodTokenizationData: @unchecked Sendable {}
+extension Pb_PaymentMethodSpecification: @unchecked Sendable {}
+extension Pb_CardParameters: @unchecked Sendable {}
+extension Pb_TokenizationSpecification: @unchecked Sendable {}
+extension Pb_BillingAddressParameters: @unchecked Sendable {}
+extension Pb_CardNetworkParameters: @unchecked Sendable {}
+extension Pb_MobileError: @unchecked Sendable {}
+extension Pb_ApplePayPaymentDataRequest: @unchecked Sendable {}
+extension Pb_ApplePayTotal: @unchecked Sendable {}
+extension Pb_ApplePayPaymentData: @unchecked Sendable {}
+extension Pb_ApplePayPaymentToken: @unchecked Sendable {}
+extension Pb_ApplePaymentMethod: @unchecked Sendable {}
+extension Pb_MobileApplicationParams: @unchecked Sendable {}
+extension Pb_MobileApplicationParamsUpdate: @unchecked Sendable {}
+extension Pb_CreateKeysRequest: @unchecked Sendable {}
+extension Pb_CreateKeysResponse: @unchecked Sendable {}
+extension Pb_MobileAnalyticsEvent: @unchecked Sendable {}
+#endif  // swift(>=5.5) && canImport(_Concurrency)
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "pb"
@@ -878,6 +1167,24 @@ extension Pb_MobileEventType: SwiftProtobuf._ProtoNameProviding {
     11: .same(proto: "MOBILE_EVENT_OPEN_URL_REQUEST"),
     12: .same(proto: "MOBILE_EVENT_BACK"),
     13: .same(proto: "MOBILE_EVENT_SHARE_URL_REQUEST"),
+    14: .same(proto: "MOBILE_EVENT_GET_PARAMS_REQUEST"),
+    15: .same(proto: "MOBILE_EVENT_GET_PARAMS_RESPONSE"),
+    16: .same(proto: "MOBILE_EVENT_SET_PARAMS_REQUEST"),
+    17: .same(proto: "MOBILE_EVENT_CREATE_KEYS_REQUEST"),
+    18: .same(proto: "MOBILE_EVENT_CREATE_KEYS_RESPONSE"),
+    19: .same(proto: "MOBILE_EVENT_PARAMS_UPDATED"),
+    20: .same(proto: "MOBILE_EVENT_ANALYTICS_EVENT"),
+    21: .same(proto: "MOBILE_EVENT_CLIPBOARD_WRITE"),
+    22: .same(proto: "MOBILE_EVENT_REVIEW"),
+  ]
+}
+
+extension Pb_MobileAnalyticsEventType: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "MOBILE_ANALYTICS_EVENT_TYPE_UNSPECIFIED"),
+    1: .same(proto: "MOBILE_ANALYTICS_EVENT_TYPE_ANDROID_APP_INSTALL_REFERRER"),
+    2: .same(proto: "MOBILE_ANALYTICS_EVENT_TYPE_ANDROID_IAU_INSTALL"),
+    3: .same(proto: "MOBILE_ANALYTICS_EVENT_TYPE_ANDROID_IAU_CANCEL"),
   ]
 }
 
@@ -894,6 +1201,12 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     8: .standard(proto: "applepay_payment_data"),
     9: .standard(proto: "open_url_request"),
     10: .standard(proto: "share_url_request"),
+    11: .standard(proto: "application_params"),
+    12: .standard(proto: "create_keys_request"),
+    13: .standard(proto: "create_keys_response"),
+    14: .standard(proto: "application_params_update"),
+    15: .standard(proto: "analytics_event"),
+    16: .standard(proto: "clipboard_write"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -905,75 +1218,178 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       case 1: try { try decoder.decodeSingularEnumField(value: &self.type) }()
       case 2: try {
         var v: Pb_MobileError?
+        var hadOneofValue = false
         if let current = self.payload {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .error(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.payload = .error(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.payload = .error(v)
+        }
       }()
       case 3: try {
         var v: Pb_IsReadyToPayRequest?
+        var hadOneofValue = false
         if let current = self.payload {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .isReadyToPayRequest(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.payload = .isReadyToPayRequest(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.payload = .isReadyToPayRequest(v)
+        }
       }()
       case 4: try {
         var v: Pb_PaymentDataRequest?
+        var hadOneofValue = false
         if let current = self.payload {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paymentDataRequest(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.payload = .paymentDataRequest(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.payload = .paymentDataRequest(v)
+        }
       }()
       case 5: try {
-        if self.payload != nil {try decoder.handleConflictingOneOf()}
         var v: Bool?
         try decoder.decodeSingularBoolField(value: &v)
-        if let v = v {self.payload = .isReadyToPay(v)}
+        if let v = v {
+          if self.payload != nil {try decoder.handleConflictingOneOf()}
+          self.payload = .isReadyToPay(v)
+        }
       }()
       case 6: try {
         var v: Pb_PaymentData?
+        var hadOneofValue = false
         if let current = self.payload {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .paymentData(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.payload = .paymentData(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.payload = .paymentData(v)
+        }
       }()
       case 7: try {
         var v: Pb_ApplePayPaymentDataRequest?
+        var hadOneofValue = false
         if let current = self.payload {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .applepayPaymentDataRequest(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.payload = .applepayPaymentDataRequest(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.payload = .applepayPaymentDataRequest(v)
+        }
       }()
       case 8: try {
         var v: Pb_ApplePayPaymentData?
+        var hadOneofValue = false
         if let current = self.payload {
-          try decoder.handleConflictingOneOf()
+          hadOneofValue = true
           if case .applepayPaymentData(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.payload = .applepayPaymentData(v)}
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.payload = .applepayPaymentData(v)
+        }
       }()
       case 9: try {
-        if self.payload != nil {try decoder.handleConflictingOneOf()}
         var v: String?
         try decoder.decodeSingularStringField(value: &v)
-        if let v = v {self.payload = .openURLRequest(v)}
+        if let v = v {
+          if self.payload != nil {try decoder.handleConflictingOneOf()}
+          self.payload = .openURLRequest(v)
+        }
       }()
       case 10: try {
-        if self.payload != nil {try decoder.handleConflictingOneOf()}
         var v: String?
         try decoder.decodeSingularStringField(value: &v)
-        if let v = v {self.payload = .shareURLRequest(v)}
+        if let v = v {
+          if self.payload != nil {try decoder.handleConflictingOneOf()}
+          self.payload = .shareURLRequest(v)
+        }
+      }()
+      case 11: try {
+        var v: Pb_MobileApplicationParams?
+        var hadOneofValue = false
+        if let current = self.payload {
+          hadOneofValue = true
+          if case .applicationParams(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.payload = .applicationParams(v)
+        }
+      }()
+      case 12: try {
+        var v: Pb_CreateKeysRequest?
+        var hadOneofValue = false
+        if let current = self.payload {
+          hadOneofValue = true
+          if case .createKeysRequest(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.payload = .createKeysRequest(v)
+        }
+      }()
+      case 13: try {
+        var v: Pb_CreateKeysResponse?
+        var hadOneofValue = false
+        if let current = self.payload {
+          hadOneofValue = true
+          if case .createKeysResponse(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.payload = .createKeysResponse(v)
+        }
+      }()
+      case 14: try {
+        var v: Pb_MobileApplicationParamsUpdate?
+        var hadOneofValue = false
+        if let current = self.payload {
+          hadOneofValue = true
+          if case .applicationParamsUpdate(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.payload = .applicationParamsUpdate(v)
+        }
+      }()
+      case 15: try {
+        var v: Pb_MobileAnalyticsEvent?
+        var hadOneofValue = false
+        if let current = self.payload {
+          hadOneofValue = true
+          if case .analyticsEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.payload = .analyticsEvent(v)
+        }
+      }()
+      case 16: try {
+        var v: String?
+        try decoder.decodeSingularStringField(value: &v)
+        if let v = v {
+          if self.payload != nil {try decoder.handleConflictingOneOf()}
+          self.payload = .clipboardWrite(v)
+        }
       }()
       default: break
       }
@@ -981,12 +1397,13 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if self.type != .mobileEventUnspecified {
       try visitor.visitSingularEnumField(value: self.type, fieldNumber: 1)
     }
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every case branch when no optimizations are
-    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.payload {
     case .error?: try {
       guard case .error(let v)? = self.payload else { preconditionFailure() }
@@ -1023,6 +1440,30 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     case .shareURLRequest?: try {
       guard case .shareURLRequest(let v)? = self.payload else { preconditionFailure() }
       try visitor.visitSingularStringField(value: v, fieldNumber: 10)
+    }()
+    case .applicationParams?: try {
+      guard case .applicationParams(let v)? = self.payload else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
+    }()
+    case .createKeysRequest?: try {
+      guard case .createKeysRequest(let v)? = self.payload else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
+    }()
+    case .createKeysResponse?: try {
+      guard case .createKeysResponse(let v)? = self.payload else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 13)
+    }()
+    case .applicationParamsUpdate?: try {
+      guard case .applicationParamsUpdate(let v)? = self.payload else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
+    }()
+    case .analyticsEvent?: try {
+      guard case .analyticsEvent(let v)? = self.payload else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
+    }()
+    case .clipboardWrite?: try {
+      guard case .clipboardWrite(let v)? = self.payload else { preconditionFailure() }
+      try visitor.visitSingularStringField(value: v, fieldNumber: 16)
     }()
     case nil: break
     }
@@ -1165,9 +1606,13 @@ extension Pb_PaymentDataRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if let v = _storage._merchantInfo {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      try { if let v = _storage._merchantInfo {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-      }
+      } }()
       if _storage._apiVersion != 0 {
         try visitor.visitSingularUInt32Field(value: _storage._apiVersion, fieldNumber: 2)
       }
@@ -1180,21 +1625,21 @@ extension Pb_PaymentDataRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
       if _storage._shippingAddressRequired != false {
         try visitor.visitSingularBoolField(value: _storage._shippingAddressRequired, fieldNumber: 5)
       }
-      if let v = _storage._shippingAddressParameters {
+      try { if let v = _storage._shippingAddressParameters {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-      }
+      } }()
       if !_storage._allowedPaymentMethods.isEmpty {
         try visitor.visitRepeatedMessageField(value: _storage._allowedPaymentMethods, fieldNumber: 7)
       }
-      if let v = _storage._transactionInfo {
+      try { if let v = _storage._transactionInfo {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
-      }
+      } }()
       if _storage._shippingOptionRequired != false {
         try visitor.visitSingularBoolField(value: _storage._shippingOptionRequired, fieldNumber: 9)
       }
-      if let v = _storage._shippingOptionParameters {
+      try { if let v = _storage._shippingOptionParameters {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
-      }
+      } }()
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -1573,6 +2018,10 @@ extension Pb_PaymentData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
       if _storage._apiVersion != 0 {
         try visitor.visitSingularUInt32Field(value: _storage._apiVersion, fieldNumber: 1)
       }
@@ -1582,15 +2031,15 @@ extension Pb_PaymentData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       if !_storage._email.isEmpty {
         try visitor.visitSingularStringField(value: _storage._email, fieldNumber: 3)
       }
-      if let v = _storage._shippingAddress {
+      try { if let v = _storage._shippingAddress {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-      }
-      if let v = _storage._paymentMethodData {
+      } }()
+      try { if let v = _storage._paymentMethodData {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-      }
-      if let v = _storage._shippingOptionData {
+      } }()
+      try { if let v = _storage._shippingOptionData {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-      }
+      } }()
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -1672,18 +2121,22 @@ extension Pb_PaymentMethodData: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.type.isEmpty {
       try visitor.visitSingularStringField(value: self.type, fieldNumber: 1)
     }
-    if let v = self._info {
+    try { if let v = self._info {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    }
+    } }()
     if !self.description_p.isEmpty {
       try visitor.visitSingularStringField(value: self.description_p, fieldNumber: 3)
     }
-    if let v = self._tokenizationData {
+    try { if let v = self._tokenizationData {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1720,15 +2173,19 @@ extension Pb_CardInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.cardNetwork.isEmpty {
       try visitor.visitSingularStringField(value: self.cardNetwork, fieldNumber: 1)
     }
     if !self.cardDetails.isEmpty {
       try visitor.visitSingularStringField(value: self.cardDetails, fieldNumber: 2)
     }
-    if let v = self._billingAddress {
+    try { if let v = self._billingAddress {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1888,15 +2345,19 @@ extension Pb_PaymentMethodSpecification: SwiftProtobuf.Message, SwiftProtobuf._M
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.type.isEmpty {
       try visitor.visitSingularStringField(value: self.type, fieldNumber: 1)
     }
-    if let v = self._parameters {
+    try { if let v = self._parameters {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    }
-    if let v = self._tokenizationSpecification {
+    } }()
+    try { if let v = self._tokenizationSpecification {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1940,6 +2401,10 @@ extension Pb_CardParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.allowedAuthMethods.isEmpty {
       try visitor.visitRepeatedStringField(value: self.allowedAuthMethods, fieldNumber: 1)
     }
@@ -1955,12 +2420,12 @@ extension Pb_CardParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     if self.billingAddressRequired != false {
       try visitor.visitSingularBoolField(value: self.billingAddressRequired, fieldNumber: 5)
     }
-    if let v = self._billingAddressParameters {
+    try { if let v = self._billingAddressParameters {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-    }
-    if let v = self._cardNetworkParameters {
+    } }()
+    try { if let v = self._cardNetworkParameters {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -2164,15 +2629,19 @@ extension Pb_ApplePayPaymentDataRequest: SwiftProtobuf.Message, SwiftProtobuf._M
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.countryCode.isEmpty {
       try visitor.visitSingularStringField(value: self.countryCode, fieldNumber: 1)
     }
     if !self.currencyCode.isEmpty {
       try visitor.visitSingularStringField(value: self.currencyCode, fieldNumber: 2)
     }
-    if let v = self._total {
+    try { if let v = self._total {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -2242,9 +2711,13 @@ extension Pb_ApplePayPaymentData: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if let v = self._token {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._token {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -2278,15 +2751,19 @@ extension Pb_ApplePayPaymentToken: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.paymentData.isEmpty {
       try visitor.visitSingularStringField(value: self.paymentData, fieldNumber: 1)
     }
     if !self.transactionIdentifier.isEmpty {
       try visitor.visitSingularStringField(value: self.transactionIdentifier, fieldNumber: 2)
     }
-    if let v = self._paymentMethod {
+    try { if let v = self._paymentMethod {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    }
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -2338,6 +2815,256 @@ extension Pb_ApplePaymentMethod: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     if lhs.displayName != rhs.displayName {return false}
     if lhs.network != rhs.network {return false}
     if lhs.type != rhs.type {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pb_MobileApplicationParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MobileApplicationParams"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "user_id"),
+    2: .standard(proto: "device_id"),
+    3: .standard(proto: "confirmation_id"),
+    4: .standard(proto: "password_enabled"),
+    5: .standard(proto: "biometry_enabled"),
+    6: .standard(proto: "biometry_available"),
+    7: .standard(proto: "fcm_token"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.userID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.deviceID) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.confirmationID) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self.passwordEnabled) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self.biometryEnabled) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self.biometryAvailable) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.fcmToken) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.userID.isEmpty {
+      try visitor.visitSingularStringField(value: self.userID, fieldNumber: 1)
+    }
+    if !self.deviceID.isEmpty {
+      try visitor.visitSingularStringField(value: self.deviceID, fieldNumber: 2)
+    }
+    if !self.confirmationID.isEmpty {
+      try visitor.visitSingularStringField(value: self.confirmationID, fieldNumber: 3)
+    }
+    if self.passwordEnabled != false {
+      try visitor.visitSingularBoolField(value: self.passwordEnabled, fieldNumber: 4)
+    }
+    if self.biometryEnabled != false {
+      try visitor.visitSingularBoolField(value: self.biometryEnabled, fieldNumber: 5)
+    }
+    if self.biometryAvailable != false {
+      try visitor.visitSingularBoolField(value: self.biometryAvailable, fieldNumber: 6)
+    }
+    if !self.fcmToken.isEmpty {
+      try visitor.visitSingularStringField(value: self.fcmToken, fieldNumber: 7)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pb_MobileApplicationParams, rhs: Pb_MobileApplicationParams) -> Bool {
+    if lhs.userID != rhs.userID {return false}
+    if lhs.deviceID != rhs.deviceID {return false}
+    if lhs.confirmationID != rhs.confirmationID {return false}
+    if lhs.passwordEnabled != rhs.passwordEnabled {return false}
+    if lhs.biometryEnabled != rhs.biometryEnabled {return false}
+    if lhs.biometryAvailable != rhs.biometryAvailable {return false}
+    if lhs.fcmToken != rhs.fcmToken {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pb_MobileApplicationParamsUpdate: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MobileApplicationParamsUpdate"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "user_id"),
+    2: .standard(proto: "confirmation_id"),
+    3: .standard(proto: "password_enabled"),
+    4: .standard(proto: "biometry_enabled"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.userID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.confirmationID) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self.passwordEnabled) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self.biometryEnabled) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.userID.isEmpty {
+      try visitor.visitSingularStringField(value: self.userID, fieldNumber: 1)
+    }
+    if !self.confirmationID.isEmpty {
+      try visitor.visitSingularStringField(value: self.confirmationID, fieldNumber: 2)
+    }
+    if self.passwordEnabled != false {
+      try visitor.visitSingularBoolField(value: self.passwordEnabled, fieldNumber: 3)
+    }
+    if self.biometryEnabled != false {
+      try visitor.visitSingularBoolField(value: self.biometryEnabled, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pb_MobileApplicationParamsUpdate, rhs: Pb_MobileApplicationParamsUpdate) -> Bool {
+    if lhs.userID != rhs.userID {return false}
+    if lhs.confirmationID != rhs.confirmationID {return false}
+    if lhs.passwordEnabled != rhs.passwordEnabled {return false}
+    if lhs.biometryEnabled != rhs.biometryEnabled {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pb_CreateKeysRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".CreateKeysRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "password"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.password) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.password.isEmpty {
+      try visitor.visitSingularStringField(value: self.password, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pb_CreateKeysRequest, rhs: Pb_CreateKeysRequest) -> Bool {
+    if lhs.password != rhs.password {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pb_CreateKeysResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".CreateKeysResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "public_key"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.publicKey) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.publicKey.isEmpty {
+      try visitor.visitSingularStringField(value: self.publicKey, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pb_CreateKeysResponse, rhs: Pb_CreateKeysResponse) -> Bool {
+    if lhs.publicKey != rhs.publicKey {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Pb_MobileAnalyticsEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MobileAnalyticsEvent"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "event_type"),
+    2: .same(proto: "value"),
+    3: .standard(proto: "utm_medium"),
+    4: .standard(proto: "utm_source"),
+    5: .standard(proto: "utm_campaign"),
+    6: .standard(proto: "utm_term"),
+    7: .standard(proto: "utm_content"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.eventType) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.value) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.utmMedium) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.utmSource) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.utmCampaign) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.utmTerm) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.utmContent) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.eventType != .unspecified {
+      try visitor.visitSingularEnumField(value: self.eventType, fieldNumber: 1)
+    }
+    if !self.value.isEmpty {
+      try visitor.visitSingularStringField(value: self.value, fieldNumber: 2)
+    }
+    if !self.utmMedium.isEmpty {
+      try visitor.visitSingularStringField(value: self.utmMedium, fieldNumber: 3)
+    }
+    if !self.utmSource.isEmpty {
+      try visitor.visitSingularStringField(value: self.utmSource, fieldNumber: 4)
+    }
+    if !self.utmCampaign.isEmpty {
+      try visitor.visitSingularStringField(value: self.utmCampaign, fieldNumber: 5)
+    }
+    if !self.utmTerm.isEmpty {
+      try visitor.visitSingularStringField(value: self.utmTerm, fieldNumber: 6)
+    }
+    if !self.utmContent.isEmpty {
+      try visitor.visitSingularStringField(value: self.utmContent, fieldNumber: 7)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Pb_MobileAnalyticsEvent, rhs: Pb_MobileAnalyticsEvent) -> Bool {
+    if lhs.eventType != rhs.eventType {return false}
+    if lhs.value != rhs.value {return false}
+    if lhs.utmMedium != rhs.utmMedium {return false}
+    if lhs.utmSource != rhs.utmSource {return false}
+    if lhs.utmCampaign != rhs.utmCampaign {return false}
+    if lhs.utmTerm != rhs.utmTerm {return false}
+    if lhs.utmContent != rhs.utmContent {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
