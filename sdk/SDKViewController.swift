@@ -252,6 +252,9 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         case Pb_MobileEventType.mobileEventShareURLRequest:
             shareURL(url: event.shareURLRequest)
             break
+        case Pb_MobileEventType.mobileEventReview:
+            openURL(url: "itms-apps://itunes.apple.com/app/id1577796889")
+            break
             
         default: break
         }
