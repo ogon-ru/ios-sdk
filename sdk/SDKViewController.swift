@@ -278,13 +278,13 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
     }
     
     private func openURL(url: String) {
-        if let link = URL(string: url) {
+        if let link = URL(string: url.encodedURL) {
             UIApplication.shared.open(link)
         }
     }
     
     private func shareURL(url: String) {
-        if let link = URL(string: url) {
+        if let link = URL(string: url.encodedURL) {
             let activityViewController = UIActivityViewController(activityItems: [link], applicationActivities: nil)
             activityViewController.excludedActivityTypes = [.airDrop, .mail]
             
@@ -321,5 +321,14 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
 private class NoopWKScriptMessageHandler : NSObject, WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         
+    }
+}
+
+extension String {
+    var encodedURL: String {
+        if self.starts(with: "http") {
+            return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? self
+        }
+        return self
     }
 }
