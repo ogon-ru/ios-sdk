@@ -20,8 +20,8 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-enum Pb_MobileEventType: SwiftProtobuf.Enum {
-  typealias RawValue = Int
+public enum Pb_MobileEventType: SwiftProtobuf.Enum {
+  public typealias RawValue = Int
   case mobileEventUnspecified // = 0
   case mobileEventGooglepayIsReadyToPayRequest // = 1
   case mobileEventGooglepayIsReadyToPayResponse // = 2
@@ -47,11 +47,11 @@ enum Pb_MobileEventType: SwiftProtobuf.Enum {
   case mobileEventReview // = 22
   case UNRECOGNIZED(Int)
 
-  init() {
+  public init() {
     self = .mobileEventUnspecified
   }
 
-  init?(rawValue: Int) {
+  public init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .mobileEventUnspecified
     case 1: self = .mobileEventGooglepayIsReadyToPayRequest
@@ -80,7 +80,7 @@ enum Pb_MobileEventType: SwiftProtobuf.Enum {
     }
   }
 
-  var rawValue: Int {
+  public var rawValue: Int {
     switch self {
     case .mobileEventUnspecified: return 0
     case .mobileEventGooglepayIsReadyToPayRequest: return 1
@@ -115,7 +115,7 @@ enum Pb_MobileEventType: SwiftProtobuf.Enum {
 
 extension Pb_MobileEventType: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  static var allCases: [Pb_MobileEventType] = [
+  public static var allCases: [Pb_MobileEventType] = [
     .mobileEventUnspecified,
     .mobileEventGooglepayIsReadyToPayRequest,
     .mobileEventGooglepayIsReadyToPayResponse,
@@ -144,19 +144,19 @@ extension Pb_MobileEventType: CaseIterable {
 
 #endif  // swift(>=4.2)
 
-enum Pb_MobileAnalyticsEventType: SwiftProtobuf.Enum {
-  typealias RawValue = Int
+public enum Pb_MobileAnalyticsEventType: SwiftProtobuf.Enum {
+  public typealias RawValue = Int
   case unspecified // = 0
   case androidAppInstallReferrer // = 1
   case androidIauInstall // = 2
   case androidIauCancel // = 3
   case UNRECOGNIZED(Int)
 
-  init() {
+  public init() {
     self = .unspecified
   }
 
-  init?(rawValue: Int) {
+  public init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .unspecified
     case 1: self = .androidAppInstallReferrer
@@ -166,7 +166,7 @@ enum Pb_MobileAnalyticsEventType: SwiftProtobuf.Enum {
     }
   }
 
-  var rawValue: Int {
+  public var rawValue: Int {
     switch self {
     case .unspecified: return 0
     case .androidAppInstallReferrer: return 1
@@ -182,7 +182,7 @@ enum Pb_MobileAnalyticsEventType: SwiftProtobuf.Enum {
 
 extension Pb_MobileAnalyticsEventType: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  static var allCases: [Pb_MobileAnalyticsEventType] = [
+  public static var allCases: [Pb_MobileAnalyticsEventType] = [
     .unspecified,
     .androidAppInstallReferrer,
     .androidIauInstall,
@@ -192,16 +192,16 @@ extension Pb_MobileAnalyticsEventType: CaseIterable {
 
 #endif  // swift(>=4.2)
 
-struct Pb_MobileEvent {
+public struct Pb_MobileEvent {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var type: Pb_MobileEventType = .mobileEventUnspecified
+  public var type: Pb_MobileEventType = .mobileEventUnspecified
 
-  var payload: Pb_MobileEvent.OneOf_Payload? = nil
+  public var payload: Pb_MobileEvent.OneOf_Payload? = nil
 
-  var error: Pb_MobileError {
+  public var error: Pb_MobileError {
     get {
       if case .error(let v)? = payload {return v}
       return Pb_MobileError()
@@ -209,7 +209,7 @@ struct Pb_MobileEvent {
     set {payload = .error(newValue)}
   }
 
-  var isReadyToPayRequest: Pb_IsReadyToPayRequest {
+  public var isReadyToPayRequest: Pb_IsReadyToPayRequest {
     get {
       if case .isReadyToPayRequest(let v)? = payload {return v}
       return Pb_IsReadyToPayRequest()
@@ -217,7 +217,7 @@ struct Pb_MobileEvent {
     set {payload = .isReadyToPayRequest(newValue)}
   }
 
-  var paymentDataRequest: Pb_PaymentDataRequest {
+  public var paymentDataRequest: Pb_PaymentDataRequest {
     get {
       if case .paymentDataRequest(let v)? = payload {return v}
       return Pb_PaymentDataRequest()
@@ -225,7 +225,7 @@ struct Pb_MobileEvent {
     set {payload = .paymentDataRequest(newValue)}
   }
 
-  var isReadyToPay: Bool {
+  public var isReadyToPay: Bool {
     get {
       if case .isReadyToPay(let v)? = payload {return v}
       return false
@@ -233,7 +233,7 @@ struct Pb_MobileEvent {
     set {payload = .isReadyToPay(newValue)}
   }
 
-  var paymentData: Pb_PaymentData {
+  public var paymentData: Pb_PaymentData {
     get {
       if case .paymentData(let v)? = payload {return v}
       return Pb_PaymentData()
@@ -241,7 +241,7 @@ struct Pb_MobileEvent {
     set {payload = .paymentData(newValue)}
   }
 
-  var applepayPaymentDataRequest: Pb_ApplePayPaymentDataRequest {
+  public var applepayPaymentDataRequest: Pb_ApplePayPaymentDataRequest {
     get {
       if case .applepayPaymentDataRequest(let v)? = payload {return v}
       return Pb_ApplePayPaymentDataRequest()
@@ -249,7 +249,7 @@ struct Pb_MobileEvent {
     set {payload = .applepayPaymentDataRequest(newValue)}
   }
 
-  var applepayPaymentData: Pb_ApplePayPaymentData {
+  public var applepayPaymentData: Pb_ApplePayPaymentData {
     get {
       if case .applepayPaymentData(let v)? = payload {return v}
       return Pb_ApplePayPaymentData()
@@ -257,7 +257,7 @@ struct Pb_MobileEvent {
     set {payload = .applepayPaymentData(newValue)}
   }
 
-  var openURLRequest: String {
+  public var openURLRequest: String {
     get {
       if case .openURLRequest(let v)? = payload {return v}
       return String()
@@ -265,7 +265,7 @@ struct Pb_MobileEvent {
     set {payload = .openURLRequest(newValue)}
   }
 
-  var shareURLRequest: String {
+  public var shareURLRequest: String {
     get {
       if case .shareURLRequest(let v)? = payload {return v}
       return String()
@@ -273,7 +273,7 @@ struct Pb_MobileEvent {
     set {payload = .shareURLRequest(newValue)}
   }
 
-  var applicationParams: Pb_MobileApplicationParams {
+  public var applicationParams: Pb_MobileApplicationParams {
     get {
       if case .applicationParams(let v)? = payload {return v}
       return Pb_MobileApplicationParams()
@@ -281,7 +281,7 @@ struct Pb_MobileEvent {
     set {payload = .applicationParams(newValue)}
   }
 
-  var createKeysRequest: Pb_CreateKeysRequest {
+  public var createKeysRequest: Pb_CreateKeysRequest {
     get {
       if case .createKeysRequest(let v)? = payload {return v}
       return Pb_CreateKeysRequest()
@@ -289,7 +289,7 @@ struct Pb_MobileEvent {
     set {payload = .createKeysRequest(newValue)}
   }
 
-  var createKeysResponse: Pb_CreateKeysResponse {
+  public var createKeysResponse: Pb_CreateKeysResponse {
     get {
       if case .createKeysResponse(let v)? = payload {return v}
       return Pb_CreateKeysResponse()
@@ -297,7 +297,7 @@ struct Pb_MobileEvent {
     set {payload = .createKeysResponse(newValue)}
   }
 
-  var applicationParamsUpdate: Pb_MobileApplicationParamsUpdate {
+  public var applicationParamsUpdate: Pb_MobileApplicationParamsUpdate {
     get {
       if case .applicationParamsUpdate(let v)? = payload {return v}
       return Pb_MobileApplicationParamsUpdate()
@@ -305,7 +305,7 @@ struct Pb_MobileEvent {
     set {payload = .applicationParamsUpdate(newValue)}
   }
 
-  var analyticsEvent: Pb_MobileAnalyticsEvent {
+  public var analyticsEvent: Pb_MobileAnalyticsEvent {
     get {
       if case .analyticsEvent(let v)? = payload {return v}
       return Pb_MobileAnalyticsEvent()
@@ -313,7 +313,7 @@ struct Pb_MobileEvent {
     set {payload = .analyticsEvent(newValue)}
   }
 
-  var clipboardWrite: String {
+  public var clipboardWrite: String {
     get {
       if case .clipboardWrite(let v)? = payload {return v}
       return String()
@@ -321,9 +321,9 @@ struct Pb_MobileEvent {
     set {payload = .clipboardWrite(newValue)}
   }
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum OneOf_Payload: Equatable {
+  public enum OneOf_Payload: Equatable {
     case error(Pb_MobileError)
     case isReadyToPayRequest(Pb_IsReadyToPayRequest)
     case paymentDataRequest(Pb_PaymentDataRequest)
@@ -341,7 +341,7 @@ struct Pb_MobileEvent {
     case clipboardWrite(String)
 
   #if !swift(>=4.1)
-    static func ==(lhs: Pb_MobileEvent.OneOf_Payload, rhs: Pb_MobileEvent.OneOf_Payload) -> Bool {
+    public static func ==(lhs: Pb_MobileEvent.OneOf_Payload, rhs: Pb_MobileEvent.OneOf_Payload) -> Bool {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
@@ -412,702 +412,704 @@ struct Pb_MobileEvent {
   #endif
   }
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_IsReadyToPayRequest {
+public struct Pb_IsReadyToPayRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var apiVersion: UInt32 = 0
+  public var apiVersion: UInt32 = 0
 
-  var apiVersionMinor: UInt32 = 0
+  public var apiVersionMinor: UInt32 = 0
 
-  var allowedPaymentMethods: [Pb_PaymentMethodSpecification] = []
+  public var allowedPaymentMethods: [Pb_PaymentMethodSpecification] = []
 
-  var existingPaymentMethodRequired: Bool = false
+  public var existingPaymentMethodRequired: Bool = false
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_PaymentDataRequest {
+public struct Pb_PaymentDataRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var merchantInfo: Pb_MerchantInfo {
+  public var merchantInfo: Pb_MerchantInfo {
     get {return _storage._merchantInfo ?? Pb_MerchantInfo()}
     set {_uniqueStorage()._merchantInfo = newValue}
   }
   /// Returns true if `merchantInfo` has been explicitly set.
-  var hasMerchantInfo: Bool {return _storage._merchantInfo != nil}
+  public var hasMerchantInfo: Bool {return _storage._merchantInfo != nil}
   /// Clears the value of `merchantInfo`. Subsequent reads from it will return its default value.
-  mutating func clearMerchantInfo() {_uniqueStorage()._merchantInfo = nil}
+  public mutating func clearMerchantInfo() {_uniqueStorage()._merchantInfo = nil}
 
-  var apiVersion: UInt32 {
+  public var apiVersion: UInt32 {
     get {return _storage._apiVersion}
     set {_uniqueStorage()._apiVersion = newValue}
   }
 
-  var apiVersionMinor: UInt32 {
+  public var apiVersionMinor: UInt32 {
     get {return _storage._apiVersionMinor}
     set {_uniqueStorage()._apiVersionMinor = newValue}
   }
 
-  var emailRequired: Bool {
+  public var emailRequired: Bool {
     get {return _storage._emailRequired}
     set {_uniqueStorage()._emailRequired = newValue}
   }
 
-  var shippingAddressRequired: Bool {
+  public var shippingAddressRequired: Bool {
     get {return _storage._shippingAddressRequired}
     set {_uniqueStorage()._shippingAddressRequired = newValue}
   }
 
-  var shippingAddressParameters: Pb_ShippingAddressParameters {
+  public var shippingAddressParameters: Pb_ShippingAddressParameters {
     get {return _storage._shippingAddressParameters ?? Pb_ShippingAddressParameters()}
     set {_uniqueStorage()._shippingAddressParameters = newValue}
   }
   /// Returns true if `shippingAddressParameters` has been explicitly set.
-  var hasShippingAddressParameters: Bool {return _storage._shippingAddressParameters != nil}
+  public var hasShippingAddressParameters: Bool {return _storage._shippingAddressParameters != nil}
   /// Clears the value of `shippingAddressParameters`. Subsequent reads from it will return its default value.
-  mutating func clearShippingAddressParameters() {_uniqueStorage()._shippingAddressParameters = nil}
+  public mutating func clearShippingAddressParameters() {_uniqueStorage()._shippingAddressParameters = nil}
 
-  var allowedPaymentMethods: [Pb_PaymentMethodSpecification] {
+  public var allowedPaymentMethods: [Pb_PaymentMethodSpecification] {
     get {return _storage._allowedPaymentMethods}
     set {_uniqueStorage()._allowedPaymentMethods = newValue}
   }
 
-  var transactionInfo: Pb_TransactionInfo {
+  public var transactionInfo: Pb_TransactionInfo {
     get {return _storage._transactionInfo ?? Pb_TransactionInfo()}
     set {_uniqueStorage()._transactionInfo = newValue}
   }
   /// Returns true if `transactionInfo` has been explicitly set.
-  var hasTransactionInfo: Bool {return _storage._transactionInfo != nil}
+  public var hasTransactionInfo: Bool {return _storage._transactionInfo != nil}
   /// Clears the value of `transactionInfo`. Subsequent reads from it will return its default value.
-  mutating func clearTransactionInfo() {_uniqueStorage()._transactionInfo = nil}
+  public mutating func clearTransactionInfo() {_uniqueStorage()._transactionInfo = nil}
 
-  var shippingOptionRequired: Bool {
+  public var shippingOptionRequired: Bool {
     get {return _storage._shippingOptionRequired}
     set {_uniqueStorage()._shippingOptionRequired = newValue}
   }
 
-  var shippingOptionParameters: Pb_ShippingOptionParameters {
+  public var shippingOptionParameters: Pb_ShippingOptionParameters {
     get {return _storage._shippingOptionParameters ?? Pb_ShippingOptionParameters()}
     set {_uniqueStorage()._shippingOptionParameters = newValue}
   }
   /// Returns true if `shippingOptionParameters` has been explicitly set.
-  var hasShippingOptionParameters: Bool {return _storage._shippingOptionParameters != nil}
+  public var hasShippingOptionParameters: Bool {return _storage._shippingOptionParameters != nil}
   /// Clears the value of `shippingOptionParameters`. Subsequent reads from it will return its default value.
-  mutating func clearShippingOptionParameters() {_uniqueStorage()._shippingOptionParameters = nil}
+  public mutating func clearShippingOptionParameters() {_uniqueStorage()._shippingOptionParameters = nil}
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Pb_MerchantInfo {
+public struct Pb_MerchantInfo {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var merchantID: String = String()
+  public var merchantID: String = String()
 
-  var merchantName: String = String()
+  public var merchantName: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_ShippingAddressParameters {
+public struct Pb_ShippingAddressParameters {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var allowedCountryCodes: [String] = []
+  public var allowedCountryCodes: [String] = []
 
-  var phoneNumberRequired: Bool = false
+  public var phoneNumberRequired: Bool = false
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_TransactionInfo {
+public struct Pb_TransactionInfo {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var transactionID: String = String()
+  public var transactionID: String = String()
 
-  var currencyCode: String = String()
+  public var currencyCode: String = String()
 
-  var countryCode: String = String()
+  public var countryCode: String = String()
 
-  var totalPrice: String = String()
+  public var totalPrice: String = String()
 
-  var totalPriceLabel: String = String()
+  public var totalPriceLabel: String = String()
 
-  var totalPriceStatus: String = String()
+  public var totalPriceStatus: String = String()
 
-  var transactionNote: String = String()
+  public var transactionNote: String = String()
 
-  var checkoutOption: String = String()
+  public var checkoutOption: String = String()
 
-  var displayItems: [Pb_DisplayItem] = []
+  public var displayItems: [Pb_DisplayItem] = []
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_DisplayItem {
+public struct Pb_DisplayItem {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var label: String = String()
+  public var label: String = String()
 
-  var type: String = String()
+  public var type: String = String()
 
-  var price: String = String()
+  public var price: String = String()
 
-  var status: String = String()
+  public var status: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_ShippingOptionParameters {
+public struct Pb_ShippingOptionParameters {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var shippingOptions: [Pb_ShippingOption] = []
+  public var shippingOptions: [Pb_ShippingOption] = []
 
-  var defaultSelectedOptionID: String = String()
+  public var defaultSelectedOptionID: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_ShippingOption {
+public struct Pb_ShippingOption {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: String = String()
+  public var id: String = String()
 
-  var label: String = String()
+  public var label: String = String()
 
-  var description_p: String = String()
+  public var description_p: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_PaymentData {
+public struct Pb_PaymentData {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var apiVersion: UInt32 {
+  public var apiVersion: UInt32 {
     get {return _storage._apiVersion}
     set {_uniqueStorage()._apiVersion = newValue}
   }
 
-  var apiVersionMinor: UInt32 {
+  public var apiVersionMinor: UInt32 {
     get {return _storage._apiVersionMinor}
     set {_uniqueStorage()._apiVersionMinor = newValue}
   }
 
-  var email: String {
+  public var email: String {
     get {return _storage._email}
     set {_uniqueStorage()._email = newValue}
   }
 
-  var shippingAddress: Pb_Address {
+  public var shippingAddress: Pb_Address {
     get {return _storage._shippingAddress ?? Pb_Address()}
     set {_uniqueStorage()._shippingAddress = newValue}
   }
   /// Returns true if `shippingAddress` has been explicitly set.
-  var hasShippingAddress: Bool {return _storage._shippingAddress != nil}
+  public var hasShippingAddress: Bool {return _storage._shippingAddress != nil}
   /// Clears the value of `shippingAddress`. Subsequent reads from it will return its default value.
-  mutating func clearShippingAddress() {_uniqueStorage()._shippingAddress = nil}
+  public mutating func clearShippingAddress() {_uniqueStorage()._shippingAddress = nil}
 
-  var paymentMethodData: Pb_PaymentMethodData {
+  public var paymentMethodData: Pb_PaymentMethodData {
     get {return _storage._paymentMethodData ?? Pb_PaymentMethodData()}
     set {_uniqueStorage()._paymentMethodData = newValue}
   }
   /// Returns true if `paymentMethodData` has been explicitly set.
-  var hasPaymentMethodData: Bool {return _storage._paymentMethodData != nil}
+  public var hasPaymentMethodData: Bool {return _storage._paymentMethodData != nil}
   /// Clears the value of `paymentMethodData`. Subsequent reads from it will return its default value.
-  mutating func clearPaymentMethodData() {_uniqueStorage()._paymentMethodData = nil}
+  public mutating func clearPaymentMethodData() {_uniqueStorage()._paymentMethodData = nil}
 
-  var shippingOptionData: Pb_SelectionOptionData {
+  public var shippingOptionData: Pb_SelectionOptionData {
     get {return _storage._shippingOptionData ?? Pb_SelectionOptionData()}
     set {_uniqueStorage()._shippingOptionData = newValue}
   }
   /// Returns true if `shippingOptionData` has been explicitly set.
-  var hasShippingOptionData: Bool {return _storage._shippingOptionData != nil}
+  public var hasShippingOptionData: Bool {return _storage._shippingOptionData != nil}
   /// Clears the value of `shippingOptionData`. Subsequent reads from it will return its default value.
-  mutating func clearShippingOptionData() {_uniqueStorage()._shippingOptionData = nil}
+  public mutating func clearShippingOptionData() {_uniqueStorage()._shippingOptionData = nil}
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Pb_SelectionOptionData {
+public struct Pb_SelectionOptionData {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: String = String()
+  public var id: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_PaymentMethodData {
+public struct Pb_PaymentMethodData {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var type: String = String()
+  public var type: String = String()
 
-  var info: Pb_CardInfo {
+  public var info: Pb_CardInfo {
     get {return _info ?? Pb_CardInfo()}
     set {_info = newValue}
   }
   /// Returns true if `info` has been explicitly set.
-  var hasInfo: Bool {return self._info != nil}
+  public var hasInfo: Bool {return self._info != nil}
   /// Clears the value of `info`. Subsequent reads from it will return its default value.
-  mutating func clearInfo() {self._info = nil}
+  public mutating func clearInfo() {self._info = nil}
 
-  var description_p: String = String()
+  public var description_p: String = String()
 
-  var tokenizationData: Pb_PaymentMethodTokenizationData {
+  public var tokenizationData: Pb_PaymentMethodTokenizationData {
     get {return _tokenizationData ?? Pb_PaymentMethodTokenizationData()}
     set {_tokenizationData = newValue}
   }
   /// Returns true if `tokenizationData` has been explicitly set.
-  var hasTokenizationData: Bool {return self._tokenizationData != nil}
+  public var hasTokenizationData: Bool {return self._tokenizationData != nil}
   /// Clears the value of `tokenizationData`. Subsequent reads from it will return its default value.
-  mutating func clearTokenizationData() {self._tokenizationData = nil}
+  public mutating func clearTokenizationData() {self._tokenizationData = nil}
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 
   fileprivate var _info: Pb_CardInfo? = nil
   fileprivate var _tokenizationData: Pb_PaymentMethodTokenizationData? = nil
 }
 
-struct Pb_CardInfo {
+public struct Pb_CardInfo {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var cardNetwork: String = String()
+  public var cardNetwork: String = String()
 
-  var cardDetails: String = String()
+  public var cardDetails: String = String()
 
-  var billingAddress: Pb_Address {
+  public var billingAddress: Pb_Address {
     get {return _billingAddress ?? Pb_Address()}
     set {_billingAddress = newValue}
   }
   /// Returns true if `billingAddress` has been explicitly set.
-  var hasBillingAddress: Bool {return self._billingAddress != nil}
+  public var hasBillingAddress: Bool {return self._billingAddress != nil}
   /// Clears the value of `billingAddress`. Subsequent reads from it will return its default value.
-  mutating func clearBillingAddress() {self._billingAddress = nil}
+  public mutating func clearBillingAddress() {self._billingAddress = nil}
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 
   fileprivate var _billingAddress: Pb_Address? = nil
 }
 
-struct Pb_Address {
+public struct Pb_Address {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var name: String = String()
+  public var name: String = String()
 
-  var address1: String = String()
+  public var address1: String = String()
 
-  var address2: String = String()
+  public var address2: String = String()
 
-  var address3: String = String()
+  public var address3: String = String()
 
-  var locality: String = String()
+  public var locality: String = String()
 
-  var administrativeArea: String = String()
+  public var administrativeArea: String = String()
 
-  var countryCode: String = String()
+  public var countryCode: String = String()
 
-  var postalCode: String = String()
+  public var postalCode: String = String()
 
-  var sortingCode: String = String()
+  public var sortingCode: String = String()
 
-  var phoneNumber: String = String()
+  public var phoneNumber: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_PaymentMethodTokenizationData {
+public struct Pb_PaymentMethodTokenizationData {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var type: String = String()
+  public var type: String = String()
 
-  var token: String = String()
+  public var token: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_PaymentMethodSpecification {
+public struct Pb_PaymentMethodSpecification {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var type: String = String()
+  public var type: String = String()
 
-  var parameters: Pb_CardParameters {
+  public var parameters: Pb_CardParameters {
     get {return _parameters ?? Pb_CardParameters()}
     set {_parameters = newValue}
   }
   /// Returns true if `parameters` has been explicitly set.
-  var hasParameters: Bool {return self._parameters != nil}
+  public var hasParameters: Bool {return self._parameters != nil}
   /// Clears the value of `parameters`. Subsequent reads from it will return its default value.
-  mutating func clearParameters() {self._parameters = nil}
+  public mutating func clearParameters() {self._parameters = nil}
 
-  var tokenizationSpecification: Pb_TokenizationSpecification {
+  public var tokenizationSpecification: Pb_TokenizationSpecification {
     get {return _tokenizationSpecification ?? Pb_TokenizationSpecification()}
     set {_tokenizationSpecification = newValue}
   }
   /// Returns true if `tokenizationSpecification` has been explicitly set.
-  var hasTokenizationSpecification: Bool {return self._tokenizationSpecification != nil}
+  public var hasTokenizationSpecification: Bool {return self._tokenizationSpecification != nil}
   /// Clears the value of `tokenizationSpecification`. Subsequent reads from it will return its default value.
-  mutating func clearTokenizationSpecification() {self._tokenizationSpecification = nil}
+  public mutating func clearTokenizationSpecification() {self._tokenizationSpecification = nil}
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 
   fileprivate var _parameters: Pb_CardParameters? = nil
   fileprivate var _tokenizationSpecification: Pb_TokenizationSpecification? = nil
 }
 
-struct Pb_CardParameters {
+public struct Pb_CardParameters {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var allowedAuthMethods: [String] = []
+  public var allowedAuthMethods: [String] = []
 
-  var allowedCardNetworks: [String] = []
+  public var allowedCardNetworks: [String] = []
 
-  var allowPrepaidCards: Bool = false
+  public var allowPrepaidCards: Bool = false
 
-  var allowCreditCards: Bool = false
+  public var allowCreditCards: Bool = false
 
-  var billingAddressRequired: Bool = false
+  public var billingAddressRequired: Bool = false
 
-  var billingAddressParameters: Pb_BillingAddressParameters {
+  public var billingAddressParameters: Pb_BillingAddressParameters {
     get {return _billingAddressParameters ?? Pb_BillingAddressParameters()}
     set {_billingAddressParameters = newValue}
   }
   /// Returns true if `billingAddressParameters` has been explicitly set.
-  var hasBillingAddressParameters: Bool {return self._billingAddressParameters != nil}
+  public var hasBillingAddressParameters: Bool {return self._billingAddressParameters != nil}
   /// Clears the value of `billingAddressParameters`. Subsequent reads from it will return its default value.
-  mutating func clearBillingAddressParameters() {self._billingAddressParameters = nil}
+  public mutating func clearBillingAddressParameters() {self._billingAddressParameters = nil}
 
-  var cardNetworkParameters: Pb_CardNetworkParameters {
+  public var cardNetworkParameters: Pb_CardNetworkParameters {
     get {return _cardNetworkParameters ?? Pb_CardNetworkParameters()}
     set {_cardNetworkParameters = newValue}
   }
   /// Returns true if `cardNetworkParameters` has been explicitly set.
-  var hasCardNetworkParameters: Bool {return self._cardNetworkParameters != nil}
+  public var hasCardNetworkParameters: Bool {return self._cardNetworkParameters != nil}
   /// Clears the value of `cardNetworkParameters`. Subsequent reads from it will return its default value.
-  mutating func clearCardNetworkParameters() {self._cardNetworkParameters = nil}
+  public mutating func clearCardNetworkParameters() {self._cardNetworkParameters = nil}
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 
   fileprivate var _billingAddressParameters: Pb_BillingAddressParameters? = nil
   fileprivate var _cardNetworkParameters: Pb_CardNetworkParameters? = nil
 }
 
-struct Pb_TokenizationSpecification {
+public struct Pb_TokenizationSpecification {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var type: String = String()
+  public var type: String = String()
 
-  var parameters: Dictionary<String,String> = [:]
+  public var parameters: Dictionary<String,String> = [:]
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_BillingAddressParameters {
+public struct Pb_BillingAddressParameters {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var format: String = String()
+  public var format: String = String()
 
-  var phoneNumberRequired: Bool = false
+  public var phoneNumberRequired: Bool = false
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_CardNetworkParameters {
+public struct Pb_CardNetworkParameters {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var cardNetwork: String = String()
+  public var cardNetwork: String = String()
 
-  var acquirerBin: String = String()
+  public var acquirerBin: String = String()
 
-  var acquirerMerchantID: String = String()
+  public var acquirerMerchantID: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_MobileError {
+public struct Pb_MobileError {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var code: UInt32 = 0
+  public var code: UInt32 = 0
 
-  var message: String = String()
+  public var message: String = String()
 
-  var description_p: String = String()
+  public var description_p: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_ApplePayPaymentDataRequest {
+public struct Pb_ApplePayPaymentDataRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var countryCode: String = String()
+  public var countryCode: String = String()
 
-  var currencyCode: String = String()
+  public var currencyCode: String = String()
 
-  var total: Pb_ApplePayTotal {
+  public var total: Pb_ApplePayTotal {
     get {return _total ?? Pb_ApplePayTotal()}
     set {_total = newValue}
   }
   /// Returns true if `total` has been explicitly set.
-  var hasTotal: Bool {return self._total != nil}
+  public var hasTotal: Bool {return self._total != nil}
   /// Clears the value of `total`. Subsequent reads from it will return its default value.
-  mutating func clearTotal() {self._total = nil}
+  public mutating func clearTotal() {self._total = nil}
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 
   fileprivate var _total: Pb_ApplePayTotal? = nil
 }
 
-struct Pb_ApplePayTotal {
+public struct Pb_ApplePayTotal {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var label: String = String()
+  public var label: String = String()
 
-  var amount: String = String()
+  public var amount: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_ApplePayPaymentData {
+public struct Pb_ApplePayPaymentData {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var token: Pb_ApplePayPaymentToken {
+  public var token: Pb_ApplePayPaymentToken {
     get {return _token ?? Pb_ApplePayPaymentToken()}
     set {_token = newValue}
   }
   /// Returns true if `token` has been explicitly set.
-  var hasToken: Bool {return self._token != nil}
+  public var hasToken: Bool {return self._token != nil}
   /// Clears the value of `token`. Subsequent reads from it will return its default value.
-  mutating func clearToken() {self._token = nil}
+  public mutating func clearToken() {self._token = nil}
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 
   fileprivate var _token: Pb_ApplePayPaymentToken? = nil
 }
 
-struct Pb_ApplePayPaymentToken {
+public struct Pb_ApplePayPaymentToken {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var paymentData: String = String()
+  public var paymentData: String = String()
 
-  var transactionIdentifier: String = String()
+  public var transactionIdentifier: String = String()
 
-  var paymentMethod: Pb_ApplePaymentMethod {
+  public var paymentMethod: Pb_ApplePaymentMethod {
     get {return _paymentMethod ?? Pb_ApplePaymentMethod()}
     set {_paymentMethod = newValue}
   }
   /// Returns true if `paymentMethod` has been explicitly set.
-  var hasPaymentMethod: Bool {return self._paymentMethod != nil}
+  public var hasPaymentMethod: Bool {return self._paymentMethod != nil}
   /// Clears the value of `paymentMethod`. Subsequent reads from it will return its default value.
-  mutating func clearPaymentMethod() {self._paymentMethod = nil}
+  public mutating func clearPaymentMethod() {self._paymentMethod = nil}
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 
   fileprivate var _paymentMethod: Pb_ApplePaymentMethod? = nil
 }
 
-struct Pb_ApplePaymentMethod {
+public struct Pb_ApplePaymentMethod {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var displayName: String = String()
+  public var displayName: String = String()
 
-  var network: String = String()
+  public var network: String = String()
 
-  var type: String = String()
+  public var type: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_MobileApplicationParams {
+public struct Pb_MobileApplicationParams {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var userID: String = String()
+  public var userID: String = String()
 
-  var deviceID: String = String()
+  public var deviceID: String = String()
 
-  var confirmationID: String = String()
+  public var confirmationID: String = String()
 
-  var passwordEnabled: Bool = false
+  public var passwordEnabled: Bool = false
 
-  var biometryEnabled: Bool = false
+  public var biometryEnabled: Bool = false
 
-  var biometryAvailable: Bool = false
+  public var biometryAvailable: Bool = false
 
-  var fcmToken: String = String()
+  public var fcmToken: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var myTrackerInstanceID: String = String()
 
-  init() {}
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
 }
 
-struct Pb_MobileApplicationParamsUpdate {
+public struct Pb_MobileApplicationParamsUpdate {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var userID: String = String()
+  public var userID: String = String()
 
-  var confirmationID: String = String()
+  public var confirmationID: String = String()
 
-  var passwordEnabled: Bool = false
+  public var passwordEnabled: Bool = false
 
-  var biometryEnabled: Bool = false
+  public var biometryEnabled: Bool = false
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_CreateKeysRequest {
+public struct Pb_CreateKeysRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var password: String = String()
+  public var password: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_CreateKeysResponse {
+public struct Pb_CreateKeysResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var publicKey: String = String()
+  public var publicKey: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Pb_MobileAnalyticsEvent {
+public struct Pb_MobileAnalyticsEvent {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var eventType: Pb_MobileAnalyticsEventType = .unspecified
+  public var eventType: Pb_MobileAnalyticsEventType = .unspecified
 
-  var value: String = String()
+  public var value: String = String()
 
-  var utmMedium: String = String()
+  public var utmMedium: String = String()
 
-  var utmSource: String = String()
+  public var utmSource: String = String()
 
-  var utmCampaign: String = String()
+  public var utmCampaign: String = String()
 
-  var utmTerm: String = String()
+  public var utmTerm: String = String()
 
-  var utmContent: String = String()
+  public var utmContent: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
@@ -1152,7 +1154,7 @@ extension Pb_MobileAnalyticsEvent: @unchecked Sendable {}
 fileprivate let _protobuf_package = "pb"
 
 extension Pb_MobileEventType: SwiftProtobuf._ProtoNameProviding {
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "MOBILE_EVENT_UNSPECIFIED"),
     1: .same(proto: "MOBILE_EVENT_GOOGLEPAY_IS_READY_TO_PAY_REQUEST"),
     2: .same(proto: "MOBILE_EVENT_GOOGLEPAY_IS_READY_TO_PAY_RESPONSE"),
@@ -1180,7 +1182,7 @@ extension Pb_MobileEventType: SwiftProtobuf._ProtoNameProviding {
 }
 
 extension Pb_MobileAnalyticsEventType: SwiftProtobuf._ProtoNameProviding {
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "MOBILE_ANALYTICS_EVENT_TYPE_UNSPECIFIED"),
     1: .same(proto: "MOBILE_ANALYTICS_EVENT_TYPE_ANDROID_APP_INSTALL_REFERRER"),
     2: .same(proto: "MOBILE_ANALYTICS_EVENT_TYPE_ANDROID_IAU_INSTALL"),
@@ -1189,8 +1191,8 @@ extension Pb_MobileAnalyticsEventType: SwiftProtobuf._ProtoNameProviding {
 }
 
 extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MobileEvent"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".MobileEvent"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "type"),
     2: .same(proto: "error"),
     3: .standard(proto: "is_ready_to_pay_request"),
@@ -1209,7 +1211,7 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     16: .standard(proto: "clipboard_write"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -1396,7 +1398,7 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
@@ -1470,7 +1472,7 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_MobileEvent, rhs: Pb_MobileEvent) -> Bool {
+  public static func ==(lhs: Pb_MobileEvent, rhs: Pb_MobileEvent) -> Bool {
     if lhs.type != rhs.type {return false}
     if lhs.payload != rhs.payload {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -1479,15 +1481,15 @@ extension Pb_MobileEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 }
 
 extension Pb_IsReadyToPayRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".IsReadyToPayRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".IsReadyToPayRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "api_version"),
     2: .standard(proto: "api_version_minor"),
     3: .standard(proto: "allowed_payment_methods"),
     4: .standard(proto: "existing_payment_method_required"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -1502,7 +1504,7 @@ extension Pb_IsReadyToPayRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.apiVersion != 0 {
       try visitor.visitSingularUInt32Field(value: self.apiVersion, fieldNumber: 1)
     }
@@ -1518,7 +1520,7 @@ extension Pb_IsReadyToPayRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_IsReadyToPayRequest, rhs: Pb_IsReadyToPayRequest) -> Bool {
+  public static func ==(lhs: Pb_IsReadyToPayRequest, rhs: Pb_IsReadyToPayRequest) -> Bool {
     if lhs.apiVersion != rhs.apiVersion {return false}
     if lhs.apiVersionMinor != rhs.apiVersionMinor {return false}
     if lhs.allowedPaymentMethods != rhs.allowedPaymentMethods {return false}
@@ -1529,8 +1531,8 @@ extension Pb_IsReadyToPayRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageI
 }
 
 extension Pb_PaymentDataRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".PaymentDataRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".PaymentDataRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "merchant_info"),
     2: .standard(proto: "api_version"),
     3: .standard(proto: "api_version_minor"),
@@ -1580,7 +1582,7 @@ extension Pb_PaymentDataRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     return _storage
   }
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
@@ -1604,7 +1606,7 @@ extension Pb_PaymentDataRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every if/case branch local when no optimizations
@@ -1644,7 +1646,7 @@ extension Pb_PaymentDataRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_PaymentDataRequest, rhs: Pb_PaymentDataRequest) -> Bool {
+  public static func ==(lhs: Pb_PaymentDataRequest, rhs: Pb_PaymentDataRequest) -> Bool {
     if lhs._storage !== rhs._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
         let _storage = _args.0
@@ -1669,13 +1671,13 @@ extension Pb_PaymentDataRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 }
 
 extension Pb_MerchantInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MerchantInfo"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".MerchantInfo"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "merchant_id"),
     2: .standard(proto: "merchant_name"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -1688,7 +1690,7 @@ extension Pb_MerchantInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.merchantID.isEmpty {
       try visitor.visitSingularStringField(value: self.merchantID, fieldNumber: 1)
     }
@@ -1698,7 +1700,7 @@ extension Pb_MerchantInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_MerchantInfo, rhs: Pb_MerchantInfo) -> Bool {
+  public static func ==(lhs: Pb_MerchantInfo, rhs: Pb_MerchantInfo) -> Bool {
     if lhs.merchantID != rhs.merchantID {return false}
     if lhs.merchantName != rhs.merchantName {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -1707,13 +1709,13 @@ extension Pb_MerchantInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
 }
 
 extension Pb_ShippingAddressParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".ShippingAddressParameters"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".ShippingAddressParameters"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "allowed_country_codes"),
     2: .standard(proto: "phone_number_required"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -1726,7 +1728,7 @@ extension Pb_ShippingAddressParameters: SwiftProtobuf.Message, SwiftProtobuf._Me
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.allowedCountryCodes.isEmpty {
       try visitor.visitRepeatedStringField(value: self.allowedCountryCodes, fieldNumber: 1)
     }
@@ -1736,7 +1738,7 @@ extension Pb_ShippingAddressParameters: SwiftProtobuf.Message, SwiftProtobuf._Me
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_ShippingAddressParameters, rhs: Pb_ShippingAddressParameters) -> Bool {
+  public static func ==(lhs: Pb_ShippingAddressParameters, rhs: Pb_ShippingAddressParameters) -> Bool {
     if lhs.allowedCountryCodes != rhs.allowedCountryCodes {return false}
     if lhs.phoneNumberRequired != rhs.phoneNumberRequired {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -1745,8 +1747,8 @@ extension Pb_ShippingAddressParameters: SwiftProtobuf.Message, SwiftProtobuf._Me
 }
 
 extension Pb_TransactionInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".TransactionInfo"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".TransactionInfo"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "transaction_id"),
     2: .standard(proto: "currency_code"),
     3: .standard(proto: "country_code"),
@@ -1758,7 +1760,7 @@ extension Pb_TransactionInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     9: .standard(proto: "display_items"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -1778,7 +1780,7 @@ extension Pb_TransactionInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.transactionID.isEmpty {
       try visitor.visitSingularStringField(value: self.transactionID, fieldNumber: 1)
     }
@@ -1809,7 +1811,7 @@ extension Pb_TransactionInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_TransactionInfo, rhs: Pb_TransactionInfo) -> Bool {
+  public static func ==(lhs: Pb_TransactionInfo, rhs: Pb_TransactionInfo) -> Bool {
     if lhs.transactionID != rhs.transactionID {return false}
     if lhs.currencyCode != rhs.currencyCode {return false}
     if lhs.countryCode != rhs.countryCode {return false}
@@ -1825,15 +1827,15 @@ extension Pb_TransactionInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
 }
 
 extension Pb_DisplayItem: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".DisplayItem"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".DisplayItem"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "label"),
     2: .same(proto: "type"),
     3: .same(proto: "price"),
     4: .same(proto: "status"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -1848,7 +1850,7 @@ extension Pb_DisplayItem: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.label.isEmpty {
       try visitor.visitSingularStringField(value: self.label, fieldNumber: 1)
     }
@@ -1864,7 +1866,7 @@ extension Pb_DisplayItem: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_DisplayItem, rhs: Pb_DisplayItem) -> Bool {
+  public static func ==(lhs: Pb_DisplayItem, rhs: Pb_DisplayItem) -> Bool {
     if lhs.label != rhs.label {return false}
     if lhs.type != rhs.type {return false}
     if lhs.price != rhs.price {return false}
@@ -1875,13 +1877,13 @@ extension Pb_DisplayItem: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 }
 
 extension Pb_ShippingOptionParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".ShippingOptionParameters"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".ShippingOptionParameters"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "shipping_options"),
     2: .standard(proto: "default_selected_option_id"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -1894,7 +1896,7 @@ extension Pb_ShippingOptionParameters: SwiftProtobuf.Message, SwiftProtobuf._Mes
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.shippingOptions.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.shippingOptions, fieldNumber: 1)
     }
@@ -1904,7 +1906,7 @@ extension Pb_ShippingOptionParameters: SwiftProtobuf.Message, SwiftProtobuf._Mes
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_ShippingOptionParameters, rhs: Pb_ShippingOptionParameters) -> Bool {
+  public static func ==(lhs: Pb_ShippingOptionParameters, rhs: Pb_ShippingOptionParameters) -> Bool {
     if lhs.shippingOptions != rhs.shippingOptions {return false}
     if lhs.defaultSelectedOptionID != rhs.defaultSelectedOptionID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -1913,14 +1915,14 @@ extension Pb_ShippingOptionParameters: SwiftProtobuf.Message, SwiftProtobuf._Mes
 }
 
 extension Pb_ShippingOption: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".ShippingOption"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".ShippingOption"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .same(proto: "label"),
     3: .same(proto: "description"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -1934,7 +1936,7 @@ extension Pb_ShippingOption: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.id.isEmpty {
       try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
     }
@@ -1947,7 +1949,7 @@ extension Pb_ShippingOption: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_ShippingOption, rhs: Pb_ShippingOption) -> Bool {
+  public static func ==(lhs: Pb_ShippingOption, rhs: Pb_ShippingOption) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.label != rhs.label {return false}
     if lhs.description_p != rhs.description_p {return false}
@@ -1957,8 +1959,8 @@ extension Pb_ShippingOption: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
 }
 
 extension Pb_PaymentData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".PaymentData"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".PaymentData"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "api_version"),
     2: .standard(proto: "api_version_minor"),
     3: .same(proto: "email"),
@@ -1996,7 +1998,7 @@ extension Pb_PaymentData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     return _storage
   }
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
@@ -2016,7 +2018,7 @@ extension Pb_PaymentData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every if/case branch local when no optimizations
@@ -2044,7 +2046,7 @@ extension Pb_PaymentData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_PaymentData, rhs: Pb_PaymentData) -> Bool {
+  public static func ==(lhs: Pb_PaymentData, rhs: Pb_PaymentData) -> Bool {
     if lhs._storage !== rhs._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
         let _storage = _args.0
@@ -2065,12 +2067,12 @@ extension Pb_PaymentData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 }
 
 extension Pb_SelectionOptionData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".SelectionOptionData"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".SelectionOptionData"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2082,14 +2084,14 @@ extension Pb_SelectionOptionData: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.id.isEmpty {
       try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_SelectionOptionData, rhs: Pb_SelectionOptionData) -> Bool {
+  public static func ==(lhs: Pb_SelectionOptionData, rhs: Pb_SelectionOptionData) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -2097,15 +2099,15 @@ extension Pb_SelectionOptionData: SwiftProtobuf.Message, SwiftProtobuf._MessageI
 }
 
 extension Pb_PaymentMethodData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".PaymentMethodData"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".PaymentMethodData"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "type"),
     2: .same(proto: "info"),
     3: .same(proto: "description"),
     4: .standard(proto: "tokenization_data"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2120,7 +2122,7 @@ extension Pb_PaymentMethodData: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
@@ -2140,7 +2142,7 @@ extension Pb_PaymentMethodData: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_PaymentMethodData, rhs: Pb_PaymentMethodData) -> Bool {
+  public static func ==(lhs: Pb_PaymentMethodData, rhs: Pb_PaymentMethodData) -> Bool {
     if lhs.type != rhs.type {return false}
     if lhs._info != rhs._info {return false}
     if lhs.description_p != rhs.description_p {return false}
@@ -2151,14 +2153,14 @@ extension Pb_PaymentMethodData: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 }
 
 extension Pb_CardInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".CardInfo"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".CardInfo"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "card_network"),
     2: .standard(proto: "card_details"),
     3: .standard(proto: "billing_address"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2172,7 +2174,7 @@ extension Pb_CardInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
@@ -2189,7 +2191,7 @@ extension Pb_CardInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_CardInfo, rhs: Pb_CardInfo) -> Bool {
+  public static func ==(lhs: Pb_CardInfo, rhs: Pb_CardInfo) -> Bool {
     if lhs.cardNetwork != rhs.cardNetwork {return false}
     if lhs.cardDetails != rhs.cardDetails {return false}
     if lhs._billingAddress != rhs._billingAddress {return false}
@@ -2199,8 +2201,8 @@ extension Pb_CardInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
 }
 
 extension Pb_Address: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".Address"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".Address"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "name"),
     2: .same(proto: "address1"),
     3: .same(proto: "address2"),
@@ -2213,7 +2215,7 @@ extension Pb_Address: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     10: .standard(proto: "phone_number"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2234,7 +2236,7 @@ extension Pb_Address: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.name.isEmpty {
       try visitor.visitSingularStringField(value: self.name, fieldNumber: 1)
     }
@@ -2268,7 +2270,7 @@ extension Pb_Address: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_Address, rhs: Pb_Address) -> Bool {
+  public static func ==(lhs: Pb_Address, rhs: Pb_Address) -> Bool {
     if lhs.name != rhs.name {return false}
     if lhs.address1 != rhs.address1 {return false}
     if lhs.address2 != rhs.address2 {return false}
@@ -2285,13 +2287,13 @@ extension Pb_Address: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
 }
 
 extension Pb_PaymentMethodTokenizationData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".PaymentMethodTokenizationData"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".PaymentMethodTokenizationData"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "type"),
     2: .same(proto: "token"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2304,7 +2306,7 @@ extension Pb_PaymentMethodTokenizationData: SwiftProtobuf.Message, SwiftProtobuf
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.type.isEmpty {
       try visitor.visitSingularStringField(value: self.type, fieldNumber: 1)
     }
@@ -2314,7 +2316,7 @@ extension Pb_PaymentMethodTokenizationData: SwiftProtobuf.Message, SwiftProtobuf
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_PaymentMethodTokenizationData, rhs: Pb_PaymentMethodTokenizationData) -> Bool {
+  public static func ==(lhs: Pb_PaymentMethodTokenizationData, rhs: Pb_PaymentMethodTokenizationData) -> Bool {
     if lhs.type != rhs.type {return false}
     if lhs.token != rhs.token {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -2323,14 +2325,14 @@ extension Pb_PaymentMethodTokenizationData: SwiftProtobuf.Message, SwiftProtobuf
 }
 
 extension Pb_PaymentMethodSpecification: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".PaymentMethodSpecification"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".PaymentMethodSpecification"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "type"),
     2: .same(proto: "parameters"),
     3: .standard(proto: "tokenization_specification"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2344,7 +2346,7 @@ extension Pb_PaymentMethodSpecification: SwiftProtobuf.Message, SwiftProtobuf._M
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
@@ -2361,7 +2363,7 @@ extension Pb_PaymentMethodSpecification: SwiftProtobuf.Message, SwiftProtobuf._M
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_PaymentMethodSpecification, rhs: Pb_PaymentMethodSpecification) -> Bool {
+  public static func ==(lhs: Pb_PaymentMethodSpecification, rhs: Pb_PaymentMethodSpecification) -> Bool {
     if lhs.type != rhs.type {return false}
     if lhs._parameters != rhs._parameters {return false}
     if lhs._tokenizationSpecification != rhs._tokenizationSpecification {return false}
@@ -2371,8 +2373,8 @@ extension Pb_PaymentMethodSpecification: SwiftProtobuf.Message, SwiftProtobuf._M
 }
 
 extension Pb_CardParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".CardParameters"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".CardParameters"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "allowed_auth_methods"),
     2: .standard(proto: "allowed_card_networks"),
     3: .standard(proto: "allow_prepaid_cards"),
@@ -2382,7 +2384,7 @@ extension Pb_CardParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     7: .standard(proto: "card_network_parameters"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2400,7 +2402,7 @@ extension Pb_CardParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
@@ -2429,7 +2431,7 @@ extension Pb_CardParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_CardParameters, rhs: Pb_CardParameters) -> Bool {
+  public static func ==(lhs: Pb_CardParameters, rhs: Pb_CardParameters) -> Bool {
     if lhs.allowedAuthMethods != rhs.allowedAuthMethods {return false}
     if lhs.allowedCardNetworks != rhs.allowedCardNetworks {return false}
     if lhs.allowPrepaidCards != rhs.allowPrepaidCards {return false}
@@ -2443,13 +2445,13 @@ extension Pb_CardParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
 }
 
 extension Pb_TokenizationSpecification: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".TokenizationSpecification"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".TokenizationSpecification"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "type"),
     2: .same(proto: "parameters"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2462,7 +2464,7 @@ extension Pb_TokenizationSpecification: SwiftProtobuf.Message, SwiftProtobuf._Me
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.type.isEmpty {
       try visitor.visitSingularStringField(value: self.type, fieldNumber: 1)
     }
@@ -2472,7 +2474,7 @@ extension Pb_TokenizationSpecification: SwiftProtobuf.Message, SwiftProtobuf._Me
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_TokenizationSpecification, rhs: Pb_TokenizationSpecification) -> Bool {
+  public static func ==(lhs: Pb_TokenizationSpecification, rhs: Pb_TokenizationSpecification) -> Bool {
     if lhs.type != rhs.type {return false}
     if lhs.parameters != rhs.parameters {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -2481,13 +2483,13 @@ extension Pb_TokenizationSpecification: SwiftProtobuf.Message, SwiftProtobuf._Me
 }
 
 extension Pb_BillingAddressParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".BillingAddressParameters"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".BillingAddressParameters"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "format"),
     2: .standard(proto: "phone_number_required"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2500,7 +2502,7 @@ extension Pb_BillingAddressParameters: SwiftProtobuf.Message, SwiftProtobuf._Mes
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.format.isEmpty {
       try visitor.visitSingularStringField(value: self.format, fieldNumber: 1)
     }
@@ -2510,7 +2512,7 @@ extension Pb_BillingAddressParameters: SwiftProtobuf.Message, SwiftProtobuf._Mes
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_BillingAddressParameters, rhs: Pb_BillingAddressParameters) -> Bool {
+  public static func ==(lhs: Pb_BillingAddressParameters, rhs: Pb_BillingAddressParameters) -> Bool {
     if lhs.format != rhs.format {return false}
     if lhs.phoneNumberRequired != rhs.phoneNumberRequired {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -2519,14 +2521,14 @@ extension Pb_BillingAddressParameters: SwiftProtobuf.Message, SwiftProtobuf._Mes
 }
 
 extension Pb_CardNetworkParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".CardNetworkParameters"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".CardNetworkParameters"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "card_network"),
     2: .standard(proto: "acquirer_bin"),
     3: .standard(proto: "acquirer_merchant_id"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2540,7 +2542,7 @@ extension Pb_CardNetworkParameters: SwiftProtobuf.Message, SwiftProtobuf._Messag
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.cardNetwork.isEmpty {
       try visitor.visitSingularStringField(value: self.cardNetwork, fieldNumber: 1)
     }
@@ -2553,7 +2555,7 @@ extension Pb_CardNetworkParameters: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_CardNetworkParameters, rhs: Pb_CardNetworkParameters) -> Bool {
+  public static func ==(lhs: Pb_CardNetworkParameters, rhs: Pb_CardNetworkParameters) -> Bool {
     if lhs.cardNetwork != rhs.cardNetwork {return false}
     if lhs.acquirerBin != rhs.acquirerBin {return false}
     if lhs.acquirerMerchantID != rhs.acquirerMerchantID {return false}
@@ -2563,14 +2565,14 @@ extension Pb_CardNetworkParameters: SwiftProtobuf.Message, SwiftProtobuf._Messag
 }
 
 extension Pb_MobileError: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MobileError"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".MobileError"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "code"),
     2: .same(proto: "message"),
     3: .same(proto: "description"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2584,7 +2586,7 @@ extension Pb_MobileError: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.code != 0 {
       try visitor.visitSingularUInt32Field(value: self.code, fieldNumber: 1)
     }
@@ -2597,7 +2599,7 @@ extension Pb_MobileError: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_MobileError, rhs: Pb_MobileError) -> Bool {
+  public static func ==(lhs: Pb_MobileError, rhs: Pb_MobileError) -> Bool {
     if lhs.code != rhs.code {return false}
     if lhs.message != rhs.message {return false}
     if lhs.description_p != rhs.description_p {return false}
@@ -2607,14 +2609,14 @@ extension Pb_MobileError: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 }
 
 extension Pb_ApplePayPaymentDataRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".ApplePayPaymentDataRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".ApplePayPaymentDataRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "country_code"),
     2: .standard(proto: "currency_code"),
     3: .same(proto: "total"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2628,7 +2630,7 @@ extension Pb_ApplePayPaymentDataRequest: SwiftProtobuf.Message, SwiftProtobuf._M
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
@@ -2645,7 +2647,7 @@ extension Pb_ApplePayPaymentDataRequest: SwiftProtobuf.Message, SwiftProtobuf._M
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_ApplePayPaymentDataRequest, rhs: Pb_ApplePayPaymentDataRequest) -> Bool {
+  public static func ==(lhs: Pb_ApplePayPaymentDataRequest, rhs: Pb_ApplePayPaymentDataRequest) -> Bool {
     if lhs.countryCode != rhs.countryCode {return false}
     if lhs.currencyCode != rhs.currencyCode {return false}
     if lhs._total != rhs._total {return false}
@@ -2655,13 +2657,13 @@ extension Pb_ApplePayPaymentDataRequest: SwiftProtobuf.Message, SwiftProtobuf._M
 }
 
 extension Pb_ApplePayTotal: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".ApplePayTotal"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".ApplePayTotal"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "label"),
     2: .same(proto: "amount"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2674,7 +2676,7 @@ extension Pb_ApplePayTotal: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.label.isEmpty {
       try visitor.visitSingularStringField(value: self.label, fieldNumber: 1)
     }
@@ -2684,7 +2686,7 @@ extension Pb_ApplePayTotal: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_ApplePayTotal, rhs: Pb_ApplePayTotal) -> Bool {
+  public static func ==(lhs: Pb_ApplePayTotal, rhs: Pb_ApplePayTotal) -> Bool {
     if lhs.label != rhs.label {return false}
     if lhs.amount != rhs.amount {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -2693,12 +2695,12 @@ extension Pb_ApplePayTotal: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
 }
 
 extension Pb_ApplePayPaymentData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".ApplePayPaymentData"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".ApplePayPaymentData"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2710,7 +2712,7 @@ extension Pb_ApplePayPaymentData: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
@@ -2721,7 +2723,7 @@ extension Pb_ApplePayPaymentData: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_ApplePayPaymentData, rhs: Pb_ApplePayPaymentData) -> Bool {
+  public static func ==(lhs: Pb_ApplePayPaymentData, rhs: Pb_ApplePayPaymentData) -> Bool {
     if lhs._token != rhs._token {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -2729,14 +2731,14 @@ extension Pb_ApplePayPaymentData: SwiftProtobuf.Message, SwiftProtobuf._MessageI
 }
 
 extension Pb_ApplePayPaymentToken: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".ApplePayPaymentToken"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".ApplePayPaymentToken"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "payment_data"),
     2: .standard(proto: "transaction_identifier"),
     3: .standard(proto: "payment_method"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2750,7 +2752,7 @@ extension Pb_ApplePayPaymentToken: SwiftProtobuf.Message, SwiftProtobuf._Message
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
@@ -2767,7 +2769,7 @@ extension Pb_ApplePayPaymentToken: SwiftProtobuf.Message, SwiftProtobuf._Message
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_ApplePayPaymentToken, rhs: Pb_ApplePayPaymentToken) -> Bool {
+  public static func ==(lhs: Pb_ApplePayPaymentToken, rhs: Pb_ApplePayPaymentToken) -> Bool {
     if lhs.paymentData != rhs.paymentData {return false}
     if lhs.transactionIdentifier != rhs.transactionIdentifier {return false}
     if lhs._paymentMethod != rhs._paymentMethod {return false}
@@ -2777,14 +2779,14 @@ extension Pb_ApplePayPaymentToken: SwiftProtobuf.Message, SwiftProtobuf._Message
 }
 
 extension Pb_ApplePaymentMethod: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".ApplePaymentMethod"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".ApplePaymentMethod"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "display_name"),
     2: .same(proto: "network"),
     3: .same(proto: "type"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2798,7 +2800,7 @@ extension Pb_ApplePaymentMethod: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.displayName.isEmpty {
       try visitor.visitSingularStringField(value: self.displayName, fieldNumber: 1)
     }
@@ -2811,7 +2813,7 @@ extension Pb_ApplePaymentMethod: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_ApplePaymentMethod, rhs: Pb_ApplePaymentMethod) -> Bool {
+  public static func ==(lhs: Pb_ApplePaymentMethod, rhs: Pb_ApplePaymentMethod) -> Bool {
     if lhs.displayName != rhs.displayName {return false}
     if lhs.network != rhs.network {return false}
     if lhs.type != rhs.type {return false}
@@ -2821,8 +2823,8 @@ extension Pb_ApplePaymentMethod: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 }
 
 extension Pb_MobileApplicationParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MobileApplicationParams"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".MobileApplicationParams"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "user_id"),
     2: .standard(proto: "device_id"),
     3: .standard(proto: "confirmation_id"),
@@ -2830,9 +2832,10 @@ extension Pb_MobileApplicationParams: SwiftProtobuf.Message, SwiftProtobuf._Mess
     5: .standard(proto: "biometry_enabled"),
     6: .standard(proto: "biometry_available"),
     7: .standard(proto: "fcm_token"),
+    8: .standard(proto: "my_tracker_instance_id"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2845,12 +2848,13 @@ extension Pb_MobileApplicationParams: SwiftProtobuf.Message, SwiftProtobuf._Mess
       case 5: try { try decoder.decodeSingularBoolField(value: &self.biometryEnabled) }()
       case 6: try { try decoder.decodeSingularBoolField(value: &self.biometryAvailable) }()
       case 7: try { try decoder.decodeSingularStringField(value: &self.fcmToken) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self.myTrackerInstanceID) }()
       default: break
       }
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.userID.isEmpty {
       try visitor.visitSingularStringField(value: self.userID, fieldNumber: 1)
     }
@@ -2872,10 +2876,13 @@ extension Pb_MobileApplicationParams: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if !self.fcmToken.isEmpty {
       try visitor.visitSingularStringField(value: self.fcmToken, fieldNumber: 7)
     }
+    if !self.myTrackerInstanceID.isEmpty {
+      try visitor.visitSingularStringField(value: self.myTrackerInstanceID, fieldNumber: 8)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_MobileApplicationParams, rhs: Pb_MobileApplicationParams) -> Bool {
+  public static func ==(lhs: Pb_MobileApplicationParams, rhs: Pb_MobileApplicationParams) -> Bool {
     if lhs.userID != rhs.userID {return false}
     if lhs.deviceID != rhs.deviceID {return false}
     if lhs.confirmationID != rhs.confirmationID {return false}
@@ -2883,21 +2890,22 @@ extension Pb_MobileApplicationParams: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if lhs.biometryEnabled != rhs.biometryEnabled {return false}
     if lhs.biometryAvailable != rhs.biometryAvailable {return false}
     if lhs.fcmToken != rhs.fcmToken {return false}
+    if lhs.myTrackerInstanceID != rhs.myTrackerInstanceID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
 extension Pb_MobileApplicationParamsUpdate: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MobileApplicationParamsUpdate"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".MobileApplicationParamsUpdate"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "user_id"),
     2: .standard(proto: "confirmation_id"),
     3: .standard(proto: "password_enabled"),
     4: .standard(proto: "biometry_enabled"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2912,7 +2920,7 @@ extension Pb_MobileApplicationParamsUpdate: SwiftProtobuf.Message, SwiftProtobuf
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.userID.isEmpty {
       try visitor.visitSingularStringField(value: self.userID, fieldNumber: 1)
     }
@@ -2928,7 +2936,7 @@ extension Pb_MobileApplicationParamsUpdate: SwiftProtobuf.Message, SwiftProtobuf
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_MobileApplicationParamsUpdate, rhs: Pb_MobileApplicationParamsUpdate) -> Bool {
+  public static func ==(lhs: Pb_MobileApplicationParamsUpdate, rhs: Pb_MobileApplicationParamsUpdate) -> Bool {
     if lhs.userID != rhs.userID {return false}
     if lhs.confirmationID != rhs.confirmationID {return false}
     if lhs.passwordEnabled != rhs.passwordEnabled {return false}
@@ -2939,12 +2947,12 @@ extension Pb_MobileApplicationParamsUpdate: SwiftProtobuf.Message, SwiftProtobuf
 }
 
 extension Pb_CreateKeysRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".CreateKeysRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".CreateKeysRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "password"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2956,14 +2964,14 @@ extension Pb_CreateKeysRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.password.isEmpty {
       try visitor.visitSingularStringField(value: self.password, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_CreateKeysRequest, rhs: Pb_CreateKeysRequest) -> Bool {
+  public static func ==(lhs: Pb_CreateKeysRequest, rhs: Pb_CreateKeysRequest) -> Bool {
     if lhs.password != rhs.password {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -2971,12 +2979,12 @@ extension Pb_CreateKeysRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 }
 
 extension Pb_CreateKeysResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".CreateKeysResponse"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".CreateKeysResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "public_key"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -2988,14 +2996,14 @@ extension Pb_CreateKeysResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.publicKey.isEmpty {
       try visitor.visitSingularStringField(value: self.publicKey, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_CreateKeysResponse, rhs: Pb_CreateKeysResponse) -> Bool {
+  public static func ==(lhs: Pb_CreateKeysResponse, rhs: Pb_CreateKeysResponse) -> Bool {
     if lhs.publicKey != rhs.publicKey {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -3003,8 +3011,8 @@ extension Pb_CreateKeysResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 }
 
 extension Pb_MobileAnalyticsEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MobileAnalyticsEvent"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".MobileAnalyticsEvent"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "event_type"),
     2: .same(proto: "value"),
     3: .standard(proto: "utm_medium"),
@@ -3014,7 +3022,7 @@ extension Pb_MobileAnalyticsEvent: SwiftProtobuf.Message, SwiftProtobuf._Message
     7: .standard(proto: "utm_content"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -3032,7 +3040,7 @@ extension Pb_MobileAnalyticsEvent: SwiftProtobuf.Message, SwiftProtobuf._Message
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.eventType != .unspecified {
       try visitor.visitSingularEnumField(value: self.eventType, fieldNumber: 1)
     }
@@ -3057,7 +3065,7 @@ extension Pb_MobileAnalyticsEvent: SwiftProtobuf.Message, SwiftProtobuf._Message
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Pb_MobileAnalyticsEvent, rhs: Pb_MobileAnalyticsEvent) -> Bool {
+  public static func ==(lhs: Pb_MobileAnalyticsEvent, rhs: Pb_MobileAnalyticsEvent) -> Bool {
     if lhs.eventType != rhs.eventType {return false}
     if lhs.value != rhs.value {return false}
     if lhs.utmMedium != rhs.utmMedium {return false}

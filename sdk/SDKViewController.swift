@@ -8,8 +8,10 @@ public protocol SDKViewDismissDelegate : NSObjectProtocol {
     func sdkViewDismiss(error: Error?)
 }
 
+private var APPSTORE_ID = "1577796889"
+
 @objcMembers
-public class SDKViewController: UIViewController, WKScriptMessageHandler, PaymentHandlerDelegate, WKNavigationDelegate, WKUIDelegate {
+open class SDKViewController: UIViewController, WKScriptMessageHandler, PaymentHandlerDelegate, WKNavigationDelegate, WKUIDelegate {
     
     public var token: String = ""
     public var baseUrl = "https://widget.ogon.ru"
@@ -238,7 +240,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
         
     }
     
-    private func handleEvent(event: Pb_MobileEvent) {
+    open func handleEvent(event: Pb_MobileEvent) {
         switch event.type {
         case Pb_MobileEventType.mobileEventApplepayIsReadyToPayRequest:
             isReadyToPayRequest()
@@ -253,7 +255,7 @@ public class SDKViewController: UIViewController, WKScriptMessageHandler, Paymen
             shareURL(url: event.shareURLRequest)
             break
         case Pb_MobileEventType.mobileEventReview:
-            openURL(url: "itms-apps://itunes.apple.com/app/id1577796889")
+            openURL(url: "itms-apps://itunes.apple.com/app/id\(APPSTORE_ID)")
             break
             
         default: break
