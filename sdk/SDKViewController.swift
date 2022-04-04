@@ -221,7 +221,7 @@ open class SDKViewController: UIViewController, WKScriptMessageHandler, PaymentH
         sendEvent(event: event)
     }
     
-    private func sendEvent(event: Pb_MobileEvent) {
+    public func sendEvent(event: Pb_MobileEvent) {
         var options = JSONEncodingOptions()
         options.preserveProtoFieldNames = true
         
